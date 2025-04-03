@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -7,13 +6,15 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/hooks/use-toast';
 import { UserPlus, Loader2 } from 'lucide-react';
+import { GoogleLogin } from '@react-oauth/google';
+import { Separator } from '@/components/ui/separator';
 
 const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { signup } = useAuth();
+  const { signup, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,14 +29,45 @@ const Signup = () => {
       });
       navigate('/');
     } catch (error) {
+      let errorMessage = 'Something went wrong. Please try again.';
+      
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+      
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: 'Something went wrong. Please try again.',
+        description: errorMessage,
       });
     } finally {
       setIsSubmitting(false);
     }
+  };
+  
+  const handleGoogleSuccess = async (credentialResponse: any) => {
+    try {
+      await loginWithGoogle(credentialResponse.credential);
+      toast({
+        title: 'Success',
+        description: 'You have been signed up with Google successfully.',
+      });
+      navigate('/');
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Google signup failed. Please try again.',
+      });
+    }
+  };
+
+  const handleGoogleError = () => {
+    toast({
+      variant: 'destructive',
+      title: 'Error',
+      description: 'Google signup failed. Please try again.',
+    });
   };
 
   return (
@@ -107,6 +139,23 @@ const Signup = () => {
               </>
             )}
           </Button>
+          
+          <div className="relative my-4">
+            <Separator />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="bg-white px-2 text-gray-500 text-sm">or continue with</span>
+            </div>
+          </div>
+
+          <div className="flex justify-center">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              size="large"
+              width="100%"
+              useOneTap
+            />
+          </div>
 
           <div className="text-center mt-4">
             <p className="text-sm text-gray-600">

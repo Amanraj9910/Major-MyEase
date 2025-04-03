@@ -1,4 +1,3 @@
-
 // Mock MongoDB service for storing user data
 // In a real application, this would connect to an actual MongoDB instance
 
@@ -7,6 +6,8 @@ export interface UserData {
   id: string;
   name: string;
   email: string;
+  picture?: string;
+  authProvider?: 'email' | 'google';
   createdAt: Date;
   lastLogin: Date;
 }

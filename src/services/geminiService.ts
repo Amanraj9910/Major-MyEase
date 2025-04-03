@@ -1,4 +1,3 @@
-
 import { toast } from "@/components/ui/use-toast";
 
 interface GeminiResponse {

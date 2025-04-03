@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -7,12 +6,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/hooks/use-toast';
 import { LogIn, Loader2 } from 'lucide-react';
+import { GoogleLogin } from '@react-oauth/google';
+import { Separator } from '@/components/ui/separator';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -35,6 +36,31 @@ const Login = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse: any) => {
+    try {
+      await loginWithGoogle(credentialResponse.credential);
+      toast({
+        title: 'Success',
+        description: 'You have been logged in with Google successfully.',
+      });
+      navigate('/');
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Google login failed. Please try again.',
+      });
+    }
+  };
+
+  const handleGoogleError = () => {
+    toast({
+      variant: 'destructive',
+      title: 'Error',
+      description: 'Google login failed. Please try again.',
+    });
   };
 
   return (
@@ -99,6 +125,23 @@ const Login = () => {
               </>
             )}
           </Button>
+
+          <div className="relative my-4">
+            <Separator />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="bg-white px-2 text-gray-500 text-sm">or continue with</span>
+            </div>
+          </div>
+
+          <div className="flex justify-center">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              size="large"
+              width="100%"
+              useOneTap
+            />
+          </div>
 
           <div className="text-center mt-4">
             <p className="text-sm text-gray-600">
