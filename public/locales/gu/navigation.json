@@ -1,0 +1,20 @@
+{
+  "home": "હોમ",
+  "services": "સેવાઓ",
+  "about": "અમારા વિશે",
+  "pricing": "કિંમત",
+  "contact": "સંપર્ક",
+  "account": "એકાઉન્ટ",
+  "profile": "પ્રોફાઇલ",
+  "dashboard": "ડેશબોર્ડ",
+  "settings": "સેટિંગ્સ",
+  "logout": "લોગ આઉટ",
+  "signIn": "સાઇન ઇન",
+  "getStarted": "શરૂ કરો",
+  "processGuidance": "પ્રક્રિયા માર્ગદર્શન",
+  "documentCreation": "દસ્તાવેજ નિર્માણ",
+  "expertAssistance": "નિષ્ણાત સહાય",
+  "searchPlaceholder": "શોધો...",
+  "languageSwitcher": "ભાષા બદલો",
+  "themeToggle": "થીમ બદલો"
+} 

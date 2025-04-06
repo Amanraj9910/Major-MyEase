@@ -1,3 +1,16 @@
+/* Multilingual Support - Font settings for different scripts */
+/* Load Noto Sans for multiple scripts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gurmukhi:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Urdu:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -43,6 +56,8 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --font-primary: 'Noto Sans', sans-serif;
   }
 
   .dark {
@@ -84,12 +99,13 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: var(--font-primary);
   }
 }
 
 @layer components {
   .glass-panel {
-    @apply bg-white/30 backdrop-blur-md border border-white/20 shadow-lg;
+    @apply bg-white/60 backdrop-blur-md border border-white/20 shadow-lg text-foreground dark:bg-black/60 dark:border-white/10;
   }
   
   .button-hover-effect {
@@ -148,4 +164,112 @@
 .blur-load > img {
   opacity: 0;
   transition: opacity 200ms ease-in-out;
+}
+
+/* Language specific font settings */
+html.lang-hi, 
+html.lang-mr {
+  --font-primary: 'Noto Sans Devanagari', 'Noto Sans', sans-serif;
+}
+
+html.lang-bn, 
+html.lang-as {
+  --font-primary: 'Noto Sans Bengali', 'Noto Sans', sans-serif;
+}
+
+html.lang-ta {
+  --font-primary: 'Noto Sans Tamil', 'Noto Sans', sans-serif;
+}
+
+html.lang-te {
+  --font-primary: 'Noto Sans Telugu', 'Noto Sans', sans-serif;
+}
+
+html.lang-kn {
+  --font-primary: 'Noto Sans Kannada', 'Noto Sans', sans-serif;
+}
+
+html.lang-ml {
+  --font-primary: 'Noto Sans Malayalam', 'Noto Sans', sans-serif;
+}
+
+html.lang-gu {
+  --font-primary: 'Noto Sans Gujarati', 'Noto Sans', sans-serif;
+}
+
+html.lang-pa {
+  --font-primary: 'Noto Sans Gurmukhi', 'Noto Sans', sans-serif;
+}
+
+html.lang-or {
+  --font-primary: 'Noto Sans Oriya', 'Noto Sans', sans-serif;
+}
+
+html.lang-ur {
+  --font-primary: 'Noto Sans Urdu', 'Noto Sans', sans-serif;
+}
+
+/* RTL language support (for Urdu) */
+html[dir="rtl"] {
+  text-align: right;
+}
+
+html[dir="rtl"] .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+/* Adjust layout for RTL when needed */
+html[dir="rtl"] .mr-1,
+html[dir="rtl"] .mr-2,
+html[dir="rtl"] .mr-3,
+html[dir="rtl"] .mr-4 {
+  margin-right: 0;
+  margin-left: 0.25rem;
+}
+
+html[dir="rtl"] .ml-1,
+html[dir="rtl"] .ml-2,
+html[dir="rtl"] .ml-3,
+html[dir="rtl"] .ml-4 {
+  margin-left: 0;
+  margin-right: 0.25rem;
+}
+
+/* Adjustments for languages with taller characters */
+html.lang-hi,
+html.lang-mr,
+html.lang-bn,
+html.lang-as,
+html.lang-ta,
+html.lang-te,
+html.lang-kn,
+html.lang-ml {
+  line-height: 1.6;
+}
+
+/* Add more space for characters with descenders and ascenders */
+.lang-ta .button,
+.lang-ml .button,
+.lang-kn .button {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Add to src/index.css */
+[dir="rtl"] {
+  /* Text alignment */
+  .text-left { text-align: right; }
+  .text-right { text-align: left; }
+  
+  /* Flex direction */
+  .flex-row { flex-direction: row-reverse; }
+  
+  /* Positioning */
+  .left-0 { right: 0; left: auto; }
+  .right-0 { left: 0; right: auto; }
+  
+  /* Margins and paddings */
+  .pl-1, .pl-2, .pl-3, .pl-4, .pl-5 { padding-left: 0; padding-right: 0.25rem; }
+  .pr-1, .pr-2, .pr-3, .pr-4, .pr-5 { padding-right: 0; padding-left: 0.25rem; }
 }

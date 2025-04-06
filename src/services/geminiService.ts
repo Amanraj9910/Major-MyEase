@@ -1,4 +1,5 @@
 import { toast } from "@/components/ui/use-toast";
+import i18n from "i18next";
 
 interface GeminiResponse {
   steps: {
@@ -16,13 +17,17 @@ interface GeminiResponse {
 export const getProcessSteps = async (task: string): Promise<GeminiResponse> => {
   try {
     // In a real implementation, this would call the Gemini API
-    // For now, we'll return mock data based on the task
-    console.log("Generating steps for task:", task);
+    // Get current language from i18n
+    const currentLanguage = i18n.language || 'en';
+    console.log("Generating steps for task:", task, "in language:", currentLanguage);
     
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     // Return mock data based on task type
+    // In a real implementation, you would pass the language to the AI model
+    // For example: genAI.generateContent({ prompt: task, language: currentLanguage })
+    
     if (task.toLowerCase().includes("passport")) {
       return mockPassportProcess;
     } else if (task.toLowerCase().includes("aadhar") || task.toLowerCase().includes("aadhaar")) {

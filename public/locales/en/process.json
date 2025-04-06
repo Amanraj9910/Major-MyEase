@@ -1,0 +1,35 @@
+{
+  "process": "Step-by-Step",
+  "generator": "Process Generator",
+  "process_generator": "Process Generator",
+  "page_description": "Enter any administrative procedure or government service to get a detailed step-by-step guide.",
+  "meta_description": "Get detailed step-by-step guides for administrative processes and government services with MyEase Process Generator",
+  
+  "what_do_you_need": "What do you need help with?",
+  "enter_any_procedure": "Enter any administrative procedure or government service to get a detailed step-by-step guide.",
+  "enter_task": "Enter Administrative Task",
+  "task_placeholder": "e.g., Passport Application, Aadhaar Registration...",
+  "get_steps": "Get Process Steps",
+  "generating": "Generating...",
+  "generate_steps": "Generate Steps",
+  
+  "input_required": "Input Required",
+  "enter_task": "Please enter a task to generate steps for.",
+  
+  "process_generated": "Process Generated",
+  "process_generated_success": "Your step-by-step guide has been generated successfully.",
+  "generation_error": "Generation Error",
+  "generation_failed": "Failed to generate process steps. Please try again.",
+  
+  "suggested_tasks": "Suggested tasks",
+  
+  "tasks": {
+    "passport": "Passport Application",
+    "aadhaar": "Aadhaar Card Registration",
+    "pan": "PAN Card Application",
+    "driving": "Driving License Application",
+    "voter": "Voter ID Registration",
+    "property": "Property Registration",
+    "marriage": "Marriage Registration"
+  }
+} 

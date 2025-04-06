@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -13,6 +12,9 @@ import DocumentForm from '@/components/document-creator/DocumentForm';
 import DocumentPreview from '@/components/document-creator/DocumentPreview';
 import { documentTemplates, generateDocument } from '@/services/documentService';
 import { DocumentTemplate } from '@/types/documents';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { Helmet } from 'react-helmet';
 
 const DocumentCreator: React.FC = () => {
   const navigate = useNavigate();
@@ -22,6 +24,9 @@ const DocumentCreator: React.FC = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [activeTab, setActiveTab] = useState<string>('templates');
   const [searchTerm, setSearchTerm] = useState('');
+  const { t } = useTranslation(['common', 'documents']);
+  const { currentLanguage } = useLanguage();
+  const langClass = `lang-${currentLanguage}`;
 
   const filteredTemplates = documentTemplates.filter(template => 
     template.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -50,8 +55,8 @@ const DocumentCreator: React.FC = () => {
     
     if (missingFields.length > 0) {
       toast({
-        title: "Missing Information",
-        description: `Please fill in the following fields: ${missingFields.join(', ')}`,
+        title: t('documents:missing_information'),
+        description: t('documents:please_fill_fields', { fields: missingFields.join(', ') }),
         variant: "destructive"
       });
       return;
@@ -65,15 +70,15 @@ const DocumentCreator: React.FC = () => {
         setActiveTab('preview');
         
         toast({
-          title: "Document Generated",
-          description: "Your document has been successfully generated."
+          title: t('documents:document_generated'),
+          description: t('documents:document_success')
         });
       })
       .catch(error => {
         console.error('Error generating document:', error);
         toast({
-          title: "Generation Failed",
-          description: "An error occurred while generating your document. Please try again.",
+          title: t('documents:generation_failed'),
+          description: t('documents:generation_error'),
           variant: "destructive"
         });
       })
@@ -85,8 +90,8 @@ const DocumentCreator: React.FC = () => {
   const handleCopyDocument = () => {
     navigator.clipboard.writeText(generatedDocument);
     toast({
-      title: "Copied",
-      description: "Document copied to clipboard"
+      title: t('documents:copied'),
+      description: t('documents:copied_to_clipboard')
     });
   };
 
@@ -102,8 +107,8 @@ const DocumentCreator: React.FC = () => {
     URL.revokeObjectURL(url);
     
     toast({
-      title: "Downloaded",
-      description: "Document downloaded successfully"
+      title: t('documents:downloaded'),
+      description: t('documents:download_success')
     });
   };
 
@@ -116,6 +121,11 @@ const DocumentCreator: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>{t('documents:document_creator')} | MyEase</title>
+        <meta name="description" content={t('documents:meta_description')} />
+      </Helmet>
+      
       <Navbar />
       
       <main className="flex-grow pt-24 pb-16 px-4">
@@ -132,28 +142,28 @@ const DocumentCreator: React.FC = () => {
               onClick={() => navigate('/')}
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Home
+              {t('common:back_to_home')}
             </Button>
             
-            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">
-              Document <span className="text-gradient">Creator</span>
+            <h1 className={`text-3xl md:text-4xl font-bold mb-2 text-center ${langClass}`}>
+              {t('documents:document')} <span className="text-gradient">{t('documents:creator')}</span>
             </h1>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto text-center mb-8">
-              Generate legally formatted documents for various administrative and personal needs
+            <p className={`text-lg text-foreground/70 max-w-2xl mx-auto text-center mb-8 ${langClass}`}>
+              {t('documents:page_description')}
             </p>
           </div>
           
           <div className="max-w-4xl mx-auto">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid grid-cols-3 mb-6">
-                <TabsTrigger value="templates" disabled={isGenerating}>
-                  1. Select Template
+                <TabsTrigger value="templates" disabled={isGenerating} className={langClass}>
+                  {t('documents:step_1_template')}
                 </TabsTrigger>
-                <TabsTrigger value="form" disabled={!selectedTemplate || isGenerating}>
-                  2. Fill Details
+                <TabsTrigger value="form" disabled={!selectedTemplate || isGenerating} className={langClass}>
+                  {t('documents:step_2_details')}
                 </TabsTrigger>
-                <TabsTrigger value="preview" disabled={!generatedDocument || isGenerating}>
-                  3. Preview & Download
+                <TabsTrigger value="preview" disabled={!generatedDocument || isGenerating} className={langClass}>
+                  {t('documents:step_3_preview')}
                 </TabsTrigger>
               </TabsList>
               

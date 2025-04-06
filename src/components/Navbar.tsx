@@ -1,9 +1,11 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, Search, ChevronDown, LogIn, UserCircle, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import DarkModeToggle from './DarkModeToggle';
+import { useTranslation } from 'react-i18next';
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -11,21 +13,27 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation('navigation');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      const shouldBeScrolled = window.scrollY > 10;
+      if (shouldBeScrolled !== isScrolled) {
+        setIsScrolled(shouldBeScrolled);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isScrolled]);
 
   const handleLogout = () => {
     logout();
@@ -36,7 +44,7 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/80 backdrop-blur-md shadow-sm py-2'
+          ? 'bg-background/90 backdrop-blur-md shadow-sm py-2'
           : 'bg-transparent py-4'
       }`}
     >
@@ -48,61 +56,48 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
-          <div className="flex space-x-6">
+        <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+          <div className="flex space-x-4 lg:space-x-6">
             <Link
               to="/"
-              className="text-foreground/80 hover:text-foreground transition-colors link-underline"
+              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors link-underline"
             >
-              Home
+              {t('home')}
             </Link>
-            <div className="relative group">
-              <button className="flex items-center text-foreground/80 hover:text-foreground transition-colors link-underline">
-                Services <ChevronDown className="ml-1 h-4 w-4" />
-              </button>
-              <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-background border border-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left">
-                <div className="py-1">
-                  <Link
-                    to="/process-generator"
-                    className="block px-4 py-2 text-sm text-foreground hover:bg-accent transition-colors"
-                  >
-                    Process Guidance
-                  </Link>
-                  <Link
-                    to="/services/documents"
-                    className="block px-4 py-2 text-sm text-foreground hover:bg-accent transition-colors"
-                  >
-                    Document Creation
-                  </Link>
-                  <Link
-                    to="/experts"
-                    className="block px-4 py-2 text-sm text-foreground hover:bg-accent transition-colors"
-                  >
-                    Expert Assistance
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="flex items-center text-sm font-medium text-foreground/80 hover:text-foreground transition-colors link-underline">
+                  {t('services')} <ChevronDown className="ml-1 h-4 w-4" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-48">
+                <DropdownMenuItem onClick={() => navigate('/process-generator')}>{t('processGuidance')}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/document-creator')}>{t('documentCreation')}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/experts')}>{t('expertAssistance')}</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Link
               to="/about"
-              className="text-foreground/80 hover:text-foreground transition-colors link-underline"
+              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors link-underline"
             >
-              About
+              {t('about')}
             </Link>
             <Link
               to="/pricing"
-              className="text-foreground/80 hover:text-foreground transition-colors link-underline"
+              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors link-underline"
             >
-              Pricing
+              {t('pricing')}
             </Link>
             <Link
               to="/contact"
-              className="text-foreground/80 hover:text-foreground transition-colors link-underline"
+              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors link-underline"
             >
-              Contact
+              {t('contact')}
             </Link>
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2">
+            <LanguageSwitcher />
+            <DarkModeToggle />
             <Button variant="ghost" size="sm" className="rounded-full w-9 h-9 p-0">
               <Search className="h-4 w-4" />
             </Button>
@@ -112,40 +107,38 @@ const Navbar = () => {
                 <DropdownMenuTrigger asChild>
                   <Button variant="secondary" size="sm" className="rounded-full">
                     <UserCircle className="h-4 w-4 mr-2" />
-                    {user?.name || 'Account'}
+                    {user?.name || t('account')}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
                   <DropdownMenuItem className="cursor-pointer" onClick={() => navigate('/profile')}>
-                    Profile
+                    {t('profile')}
                   </DropdownMenuItem>
                   <DropdownMenuItem className="cursor-pointer" onClick={() => navigate('/dashboard')}>
-                    Dashboard
+                    {t('dashboard')}
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className="cursor-pointer text-destructive" onClick={handleLogout}>
                     <LogOut className="h-4 w-4 mr-2" />
-                    Logout
+                    {t('logout')}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <>
                 <Button 
-                  variant="secondary" 
+                  variant="ghost" 
                   size="sm" 
-                  className="rounded-full"
                   onClick={() => navigate('/login')}
                 >
-                  <LogIn className="h-4 w-4 mr-1" />
-                  Sign In
+                  {t('signIn')}
                 </Button>
                 <Button 
                   size="sm" 
                   className="rounded-full"
                   onClick={() => navigate('/signup')}
                 >
-                  Get Started
+                  {t('getStarted')}
                 </Button>
               </>
             )}
@@ -153,12 +146,15 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center space-x-1">
+          <LanguageSwitcher />
+          <DarkModeToggle />
           <Button
             variant="ghost"
             size="sm"
             className="w-9 h-9 p-0"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
               <X className="h-5 w-5" />
@@ -170,120 +166,117 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div
-        className={`md:hidden fixed inset-0 z-40 bg-background transition-transform duration-300 ease-in-out pt-16 ${
-          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-          <Link
-            to="/"
-            className="py-2 text-foreground hover:text-primary transition-colors"
-            onClick={() => setIsMobileMenuOpen(false)}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden absolute top-full left-0 right-0 bg-background shadow-lg overflow-hidden"
           >
-            Home
-          </Link>
-          <div className="py-2">
-            <button className="flex items-center justify-between w-full text-foreground hover:text-primary transition-colors">
-              Services <ChevronDown className="h-4 w-4" />
-            </button>
-            <div className="pl-4 mt-2 space-y-2">
+            <div className="container mx-auto px-4 py-4 flex flex-col space-y-2">
               <Link
-                to="/process-generator"
-                className="block py-1 text-foreground/80 hover:text-primary transition-colors"
+                to="/"
+                className="block py-2 text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Process Guidance
+                {t('home')}
               </Link>
+              
+              {/* Simplified mobile services dropdown */}
+              <Accordion type="single" collapsible>
+                <AccordionItem value="services" className="border-b-0">
+                  <AccordionTrigger className="py-2 text-foreground hover:text-primary hover:no-underline flex justify-between w-full">
+                    {t('services')}
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-0 pl-4">
+                    <Link
+                      to="/process-generator"
+                      className="block py-2 text-foreground/80 hover:text-primary transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {t('processGuidance')}
+                    </Link>
+                    <Link
+                      to="/document-creator"
+                      className="block py-2 text-foreground/80 hover:text-primary transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {t('documentCreation')}
+                    </Link>
+                    <Link
+                      to="/experts"
+                      className="block py-2 text-foreground/80 hover:text-primary transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {t('expertAssistance')}
+                    </Link>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+              
               <Link
-                to="/services/documents"
-                className="block py-1 text-foreground/80 hover:text-primary transition-colors"
+                to="/about"
+                className="block py-2 text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Document Creation
+                {t('about')}
               </Link>
               <Link
-                to="/experts"
-                className="block py-1 text-foreground/80 hover:text-primary transition-colors"
+                to="/pricing"
+                className="block py-2 text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Expert Assistance
+                {t('pricing')}
               </Link>
+              <Link
+                to="/contact"
+                className="block py-2 text-foreground hover:text-primary transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {t('contact')}
+              </Link>
+              <div className="border-t pt-4 mt-2 flex flex-col space-y-2">
+                {isAuthenticated ? (
+                  <>
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start"
+                      onClick={() => { navigate('/profile'); setIsMobileMenuOpen(false); }}
+                    >
+                      <UserCircle className="h-4 w-4 mr-2" /> {t('profile')}
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start text-destructive hover:text-destructive"
+                      onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}
+                    >
+                      <LogOut className="h-4 w-4 mr-2" /> {t('logout')}
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start"
+                      onClick={() => { navigate('/login'); setIsMobileMenuOpen(false); }}
+                    >
+                      <LogIn className="h-4 w-4 mr-2" /> {t('signIn')}
+                    </Button>
+                    <Button 
+                      className="w-full"
+                      onClick={() => { navigate('/signup'); setIsMobileMenuOpen(false); }}
+                    >
+                      {t('getStarted')}
+                    </Button>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-          <Link
-            to="/about"
-            className="py-2 text-foreground hover:text-primary transition-colors"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            About
-          </Link>
-          <Link
-            to="/pricing"
-            className="py-2 text-foreground hover:text-primary transition-colors"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Pricing
-          </Link>
-          <Link
-            to="/contact"
-            className="py-2 text-foreground hover:text-primary transition-colors"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Contact
-          </Link>
-          <div className="pt-4 flex flex-col space-y-2">
-            {isAuthenticated ? (
-              <>
-                <Button 
-                  variant="outline" 
-                  className="w-full flex justify-between items-center"
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    navigate('/profile');
-                  }}
-                >
-                  Profile <UserCircle className="h-4 w-4" />
-                </Button>
-                <Button 
-                  variant="destructive" 
-                  className="w-full"
-                  onClick={() => {
-                    handleLogout();
-                    setIsMobileMenuOpen(false);
-                  }}
-                >
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button 
-                  variant="secondary" 
-                  className="w-full"
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    navigate('/login');
-                  }}
-                >
-                  <LogIn className="h-4 w-4 mr-2" />
-                  Sign In
-                </Button>
-                <Button 
-                  className="w-full"
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    navigate('/signup');
-                  }}
-                >
-                  Get Started
-                </Button>
-              </>
-            )}
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

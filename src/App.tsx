@@ -16,6 +16,7 @@ import About from "./pages/About";
 import Pricing from "./pages/Pricing";
 import Contact from "./pages/Contact";
 import Experts from "./pages/Experts";
+import LanguageDemo from "./pages/LanguageDemo";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -43,6 +44,7 @@ const App = () => {
                   <Route path="/pricing" element={<Pricing />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/experts" element={<Experts />} />
+                  <Route path="/language-demo" element={<LanguageDemo />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>

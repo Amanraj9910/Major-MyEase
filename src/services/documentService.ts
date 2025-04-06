@@ -1,5 +1,5 @@
-
 import { DocumentTemplate } from '@/types/documents';
+import i18n from 'i18next';
 
 export const documentTemplates: DocumentTemplate[] = [
   {
@@ -192,6 +192,10 @@ export const generateDocument = (
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
     try {
+      // Get current language
+      const currentLanguage = i18n.language || 'en';
+      console.log(`Generating document in language: ${currentLanguage}`);
+      
       // Simulate API call and processing delay
       setTimeout(() => {
         let docText = template.sampleDocument;
@@ -201,13 +205,22 @@ export const generateDocument = (
           docText = docText.replace(new RegExp(`\\[${key}\\]`, 'g'), value);
         });
         
-        // Replace current date placeholder
-        const currentDate = new Date().toLocaleDateString('en-IN', {
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric'
-        });
-        docText = docText.replace(/\[Current Date\]/g, currentDate);
+        // Replace [Current Date] with formatted date in the current language
+        const now = new Date();
+        let formattedDate;
+        
+        try {
+          formattedDate = new Intl.DateTimeFormat(currentLanguage, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }).format(now);
+        } catch (err) {
+          // Fallback to simple date format if the locale is not supported
+          formattedDate = now.toLocaleDateString();
+        }
+        
+        docText = docText.replace(/\[Current Date\]/g, formattedDate);
         
         resolve(docText);
       }, 1500);

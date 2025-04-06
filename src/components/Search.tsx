@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Search as SearchIcon, Mic, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -97,7 +96,7 @@ const Search = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-secondary/30">
+    <section className="py-20 bg-gradient-to-b from-background to-secondary/30 dark:from-background dark:to-secondary/50">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 animate-on-scroll">
@@ -105,14 +104,14 @@ const Search = () => {
               Find Any Government Service 
               <span className="text-gradient"> In One Search</span>
             </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+            <p className="text-lg text-foreground/90 max-w-2xl mx-auto dark:text-foreground/80">
               Simple, fast access to information about government processes, requirements, 
               and applications—all in one place.
             </p>
           </div>
           
           <div className="relative animate-on-scroll">
-            <div className="absolute inset-0 -z-10 bg-primary/5 rounded-[28px] transform translate-y-2 translate-x-2 transition-transform group-hover:translate-y-0 group-hover:translate-x-0" />
+            <div className="absolute inset-0 -z-10 bg-primary/5 dark:bg-primary/10 rounded-[28px] transform translate-y-2 translate-x-2 transition-transform group-hover:translate-y-0 group-hover:translate-x-0" />
             
             <form onSubmit={handleSearch} className="relative bg-white rounded-[28px] shadow-xl p-1 md:p-2 transition-all">
               <div className="flex items-center">

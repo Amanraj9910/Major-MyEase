@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -14,11 +13,11 @@ const Hero = () => {
   return (
     <section className="relative overflow-hidden py-20 md:py-28">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-accent/30 to-transparent -z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-accent/30 to-transparent dark:from-accent/20 -z-10" />
       
       {/* Decorative circles */}
-      <div className="absolute top-24 left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-accent/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute top-24 left-10 w-64 h-64 bg-primary/5 dark:bg-primary/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-accent/10 dark:bg-accent/15 rounded-full blur-3xl -z-10" />
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
@@ -57,21 +56,6 @@ const Hero = () => {
                 Generate Process Guide
               </Link>
             </Button>
-          </div>
-          
-          <div className="w-full max-w-5xl mx-auto">
-            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl glass-panel">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover-scale">
-                  <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                      <polygon points="5 3 19 12 5 21 5 3" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
           
           <Link 

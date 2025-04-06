@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,6 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, CheckCircle } from 'lucide-react';
 import { DocumentTemplate } from '@/types/documents';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface DocumentFormProps {
   template: DocumentTemplate;
@@ -26,17 +27,23 @@ const DocumentForm = ({
   onBack, 
   isGenerating 
 }: DocumentFormProps) => {
+  const { t } = useTranslation(['common', 'documents']);
+  const { currentLanguage } = useLanguage();
+  const langClass = `lang-${currentLanguage}`;
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{template.name}</CardTitle>
-        <CardDescription>Fill in the details below to generate your document</CardDescription>
+        <CardTitle className={langClass}>{template.name}</CardTitle>
+        <CardDescription className={langClass}>{t('documents:fill_details')}</CardDescription>
       </CardHeader>
       <CardContent>
         <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); onGenerate(); }}>
           {template.fields.map((field) => (
             <div key={field.name} className="space-y-2">
-              <Label htmlFor={field.name}>{field.label}{field.required && <span className="text-red-500">*</span>}</Label>
+              <Label htmlFor={field.name} className={langClass}>
+                {field.label}{field.required && <span className="text-red-500">*</span>}
+              </Label>
               
               {field.type === 'text' && (
                 <Input
@@ -63,7 +70,7 @@ const DocumentForm = ({
                   onValueChange={(value) => onInputChange(field.name, value)}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select an option" />
+                    <SelectValue placeholder={t('documents:select_option')} />
                   </SelectTrigger>
                   <SelectContent>
                     {field.options.map((option) => (
@@ -83,7 +90,7 @@ const DocumentForm = ({
               variant="outline"
               onClick={onBack}
             >
-              Back to Templates
+              {t('documents:back_to_templates')}
             </Button>
             <Button
               type="submit"
@@ -92,12 +99,12 @@ const DocumentForm = ({
               {isGenerating ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Generating...
+                  {t('documents:generating')}
                 </>
               ) : (
                 <>
                   <CheckCircle className="mr-2 h-4 w-4" />
-                  Generate Document
+                  {t('documents:generate_document')}
                 </>
               )}
             </Button>

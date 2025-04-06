@@ -1,9 +1,10 @@
-
 import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import DocumentTemplate from './DocumentTemplate';
 import { DocumentTemplate as DocumentTemplateType } from '@/types/documents';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface TemplateSelectorProps {
   templates: DocumentTemplateType[];
@@ -18,13 +19,17 @@ const TemplateSelector = ({
   onSearchChange, 
   onSelectTemplate 
 }: TemplateSelectorProps) => {
+  const { t } = useTranslation(['common', 'documents']);
+  const { currentLanguage } = useLanguage();
+  const langClass = `lang-${currentLanguage}`;
+
   return (
     <div>
       <div className="mb-6">
-        <Label htmlFor="searchTemplates">Search Templates</Label>
+        <Label htmlFor="searchTemplates" className={langClass}>{t('documents:search_templates')}</Label>
         <Input
           id="searchTemplates"
-          placeholder="Search by name, description or type..."
+          placeholder={t('documents:search_placeholder')}
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
           className="max-w-md"
@@ -42,9 +47,9 @@ const TemplateSelector = ({
           ))
         ) : (
           <div className="col-span-full text-center py-12">
-            <h3 className="text-lg font-medium mb-2">No templates found</h3>
-            <p className="text-muted-foreground">
-              Try adjusting your search terms
+            <h3 className={`text-lg font-medium mb-2 ${langClass}`}>{t('documents:no_templates_found')}</h3>
+            <p className={`text-muted-foreground ${langClass}`}>
+              {t('documents:adjust_search')}
             </p>
           </div>
         )}

@@ -1,0 +1,20 @@
+{
+  "home": "Home",
+  "services": "Services",
+  "about": "About",
+  "pricing": "Pricing",
+  "contact": "Contact",
+  "account": "Account",
+  "profile": "Profile",
+  "dashboard": "Dashboard",
+  "settings": "Settings",
+  "logout": "Logout",
+  "signIn": "Sign In",
+  "getStarted": "Get Started",
+  "processGuidance": "Process Guidance",
+  "documentCreation": "Document Creation",
+  "expertAssistance": "Expert Assistance",
+  "searchPlaceholder": "Search...",
+  "languageSwitcher": "Change Language",
+  "themeToggle": "Toggle Theme"
+} 
