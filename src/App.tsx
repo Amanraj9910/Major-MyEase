@@ -6,9 +6,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import ProtectedRoute from "./components/ProtectedRoute";
 import Index from "./pages/Index";
 import ProcessGenerator from "./pages/ProcessGenerator";
 import DocumentCreator from "./pages/DocumentCreator";
+import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
@@ -36,8 +39,26 @@ const App = () => {
               <BrowserRouter>
                 <Routes>
                   <Route path="/" element={<Index />} />
-                  <Route path="/process-generator" element={<ProcessGenerator />} />
-                  <Route path="/document-creator" element={<DocumentCreator />} />
+                  <Route path="/dashboard" element={
+                    <ProtectedRoute>
+                      <Dashboard />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/profile" element={
+                    <ProtectedRoute>
+                      <Profile />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/process-generator" element={
+                    <ProtectedRoute>
+                      <ProcessGenerator />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/document-creator" element={
+                    <ProtectedRoute>
+                      <DocumentCreator />
+                    </ProtectedRoute>
+                  } />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/about" element={<About />} />

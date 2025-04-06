@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,12 +9,31 @@ import { LogIn, Loader2 } from 'lucide-react';
 import { GoogleLogin } from '@react-oauth/google';
 import { Separator } from '@/components/ui/separator';
 
+// Function to extract location state
+interface LocationState {
+  from?: {
+    pathname: string;
+  };
+}
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { login, loginWithGoogle } = useAuth();
+  const { login, loginWithGoogle, user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Get the location the user was trying to access
+  const locationState = location.state as LocationState;
+  const from = locationState?.from?.pathname || '/dashboard';
+
+  // If user is already logged in, redirect to dashboard
+  React.useEffect(() => {
+    if (user) {
+      navigate('/dashboard');
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +45,8 @@ const Login = () => {
         title: 'Success',
         description: 'You have been logged in successfully.',
       });
-      navigate('/');
+      // Redirect to the original requested page or dashboard
+      navigate(from);
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -45,7 +65,8 @@ const Login = () => {
         title: 'Success',
         description: 'You have been logged in with Google successfully.',
       });
-      navigate('/');
+      // Redirect to the original requested page or dashboard
+      navigate(from);
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -69,7 +90,7 @@ const Login = () => {
         <div className="text-center">
           <h1 className="text-2xl font-bold">Welcome Back</h1>
           <p className="mt-2 text-sm text-gray-600">
-            Log in to access government services
+            Log in to access your dashboard
           </p>
         </div>
 

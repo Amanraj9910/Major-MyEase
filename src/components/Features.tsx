@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Search, Mic, MessageSquare, FileText, Users, Lock } from 'lucide-react';
@@ -57,13 +56,13 @@ const Features = () => {
   };
 
   return (
-    <section id="features" className="py-20 bg-white">
+    <section id="features" className="py-20 bg-background">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16 animate-on-scroll">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Powerful Features to <span className="text-gradient">Simplify</span> Your Experience
           </h2>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-lg text-foreground/90 max-w-2xl mx-auto dark:text-foreground/80">
             We've built tools that make navigating government services intuitive and accessible for everyone.
           </p>
         </div>
@@ -78,17 +77,17 @@ const Features = () => {
           {features.map((feature, index) => (
             <motion.div 
               key={index}
-              className="group relative bg-white rounded-xl p-8 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+              className="group relative bg-card rounded-xl p-8 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
               variants={itemVariants}
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/20 rounded-full -mr-12 -mt-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/20 dark:bg-accent/10 rounded-full -mr-12 -mt-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div className="relative z-10">
-                <div className="w-14 h-14 rounded-full bg-accent flex items-center justify-center mb-6 text-primary">
+                <div className="w-14 h-14 rounded-full bg-accent dark:bg-accent/80 flex items-center justify-center mb-6 text-primary">
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-foreground/70">{feature.description}</p>
+                <p className="text-foreground/90 dark:text-foreground/80">{feature.description}</p>
               </div>
             </motion.div>
           ))}

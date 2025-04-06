@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -108,7 +107,7 @@ const ProcessGenerator: React.FC = () => {
             <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">
               Step-by-Step <span className="text-gradient">Process</span> Generator
             </h1>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto text-center mb-8">
+            <p className="text-lg text-foreground/90 max-w-2xl mx-auto text-center mb-8 dark:text-foreground/80">
               Enter any administrative procedure or government service to get a detailed step-by-step guide.
             </p>
             

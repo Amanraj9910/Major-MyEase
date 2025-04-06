@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -69,12 +68,12 @@ const ProcessDisplay: React.FC<ProcessDisplayProps> = ({ taskName, overview, ste
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="bg-white rounded-xl shadow-sm p-6 md:p-8 border border-border/60 mb-6">
+      <div className="bg-card rounded-xl shadow-sm p-6 md:p-8 border border-border/60 mb-6">
         <h1 className="text-2xl md:text-3xl font-bold text-center mb-3 flex items-center justify-center gap-2">
           <Landmark className="h-7 w-7 text-primary" />
           {taskName}
         </h1>
-        <p className="text-center text-muted-foreground mb-6">{overview}</p>
+        <p className="text-center text-foreground/90 dark:text-foreground/80 mb-6">{overview}</p>
         
         <Tabs defaultValue="all" className="mb-6" onValueChange={(value) => setActiveTab(value as 'all' | 'online' | 'offline')}>
           <TabsList className="grid grid-cols-3 w-full max-w-md mx-auto">
@@ -126,9 +125,9 @@ const ProcessDisplay: React.FC<ProcessDisplayProps> = ({ taskName, overview, ste
                 
                 <div 
                   className={`${
-                    activeTab === 'online' ? 'bg-blue-50 hover:bg-blue-100' : 
-                    activeTab === 'offline' ? 'bg-amber-50 hover:bg-amber-100' :
-                    offlineSteps.includes(step) ? 'bg-amber-50/70 hover:bg-amber-100/70' : 'bg-blue-50/70 hover:bg-blue-100/70'
+                    activeTab === 'online' ? 'bg-blue-50 dark:bg-blue-950/30 hover:bg-blue-100 dark:hover:bg-blue-950/50' : 
+                    activeTab === 'offline' ? 'bg-amber-50 dark:bg-amber-950/30 hover:bg-amber-100 dark:hover:bg-amber-950/50' :
+                    offlineSteps.includes(step) ? 'bg-amber-50/70 dark:bg-amber-950/30 hover:bg-amber-100/70 dark:hover:bg-amber-950/50' : 'bg-blue-50/70 dark:bg-blue-950/30 hover:bg-blue-100/70 dark:hover:bg-blue-950/50'
                   } rounded-lg p-4 transition-colors cursor-pointer`} 
                   onClick={() => toggleStep(index)}
                 >
@@ -160,15 +159,15 @@ const ProcessDisplay: React.FC<ProcessDisplayProps> = ({ taskName, overview, ste
                     animate={{ height: expandedStep === index ? 'auto' : 0, opacity: expandedStep === index ? 1 : 0 }}
                     className="overflow-hidden mt-2"
                   >
-                    <p className="text-foreground/80 mb-3">{step.description}</p>
+                    <p className="text-foreground/90 dark:text-foreground/80 mb-3">{step.description}</p>
                     
                     <div className="space-y-2 text-sm">
                       {step.documents && step.documents.length > 0 && (
                         <div className="flex items-start gap-2">
-                          <FileText className="h-4 w-4 text-blue-500 mt-0.5" />
+                          <FileText className="h-4 w-4 text-blue-500 dark:text-blue-400 mt-0.5" />
                           <div>
                             <span className="font-medium">Required Documents:</span>
-                            <ul className="list-disc list-inside ml-1 text-foreground/70">
+                            <ul className="list-disc list-inside ml-1 text-foreground/90 dark:text-foreground/80">
                               {step.documents.map((doc, i) => (
                                 <li key={i}>{doc}</li>
                               ))}
@@ -179,21 +178,21 @@ const ProcessDisplay: React.FC<ProcessDisplayProps> = ({ taskName, overview, ste
                       
                       {step.timeframe && (
                         <div className="flex items-center gap-2">
-                          <Clock className="h-4 w-4 text-amber-500" />
+                          <Clock className="h-4 w-4 text-amber-500 dark:text-amber-400" />
                           <span><span className="font-medium">Time Required:</span> {step.timeframe}</span>
                         </div>
                       )}
                       
                       {step.fees && (
                         <div className="flex items-center gap-2">
-                          <IndianRupee className="h-4 w-4 text-green-500" />
+                          <IndianRupee className="h-4 w-4 text-green-500 dark:text-green-400" />
                           <span><span className="font-medium">Fees:</span> {step.fees}</span>
                         </div>
                       )}
                       
                       {step.tips && (
                         <div className="flex items-start gap-2">
-                          <HelpCircle className="h-4 w-4 text-purple-500 mt-0.5" />
+                          <HelpCircle className="h-4 w-4 text-purple-500 dark:text-purple-400 mt-0.5" />
                           <span><span className="font-medium">Helpful Tip:</span> {step.tips}</span>
                         </div>
                       )}
@@ -202,16 +201,16 @@ const ProcessDisplay: React.FC<ProcessDisplayProps> = ({ taskName, overview, ste
                         <h4 className="font-medium mb-1">Where to Complete This Step:</h4>
                         {offlineSteps.includes(step) ? (
                           <div className="flex items-start gap-2">
-                            <MapPin className="h-4 w-4 text-red-500 mt-0.5" />
+                            <MapPin className="h-4 w-4 text-red-500 dark:text-red-400 mt-0.5" />
                             <div>
                               <p className="font-medium">Visit in person:</p>
-                              <p className="text-foreground/70">Local government office or designated service center</p>
+                              <p className="text-foreground/90 dark:text-foreground/80">Local government office or designated service center</p>
                               <p className="text-xs text-muted-foreground mt-1">Operating hours: Monday-Friday, 9 AM - 5 PM</p>
                             </div>
                           </div>
                         ) : (
                           <div className="flex items-start gap-2">
-                            <Globe className="h-4 w-4 text-blue-500 mt-0.5" />
+                            <Globe className="h-4 w-4 text-blue-500 dark:text-blue-400 mt-0.5" />
                             <div>
                               <p className="font-medium">Complete online:</p>
                               <a href="#" className="text-primary hover:underline">Official portal link</a>
