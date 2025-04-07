@@ -193,7 +193,7 @@ const expertDetailsData: ExpertDetails[] = [
       },
       {
         id: "rev2",
-    name: "Anita Desai",
+        name: "Anita Desai",
         date: "June 8, 2023",
         rating: 4,
         comment: "Very helpful with my property registration. The process was seamless and he handled all the paperwork efficiently.",
@@ -282,7 +282,400 @@ const expertDetailsData: ExpertDetails[] = [
       }
     ]
   },
-  // Additional experts data would go here...
+  // New expert #3
+  {
+    id: 3,
+    name: "Aishwarya Verma",
+    image: "https://randomuser.me/api/portraits/women/28.jpg",
+    field: "Income Tax",
+    specialization: ["Tax Filing", "Audit Defense", "Tax Planning", "GST Registration", "Corporate Taxation"],
+    rating: 4.8,
+    experience: 10,
+    rate: 20,
+    languages: ["English", "Hindi", "Gujarati"],
+    bio: "Aishwarya Verma is a certified tax professional with over a decade of experience in personal and business tax filing. She has helped hundreds of clients navigate complex tax regulations, maximize deductions, and resolve tax disputes with authorities. Her expertise covers all aspects of Indian taxation including income tax, GST, and corporate tax compliance.",
+    location: "Bangalore, Karnataka",
+    phone: "+91 9876543212",
+    email: "aishwarya.verma@example.com",
+    availability: [
+      { day: "Monday", slots: ["9:30 AM", "11:00 AM", "2:30 PM", "4:00 PM"] },
+      { day: "Tuesday", slots: ["9:30 AM", "11:00 AM", "2:30 PM", "4:00 PM"] },
+      { day: "Wednesday", slots: ["9:30 AM", "11:00 AM", "2:30 PM"] },
+      { day: "Thursday", slots: ["9:30 AM", "11:00 AM", "2:30 PM", "4:00 PM"] },
+      { day: "Saturday", slots: ["10:00 AM", "11:30 AM", "1:00 PM"] },
+    ],
+    reviews: [
+      {
+        id: "rev1",
+        name: "Rajan Mehta",
+        avatar: "https://randomuser.me/api/portraits/men/52.jpg",
+        date: "July 25, 2023",
+        rating: 5,
+        comment: "Ms. Verma helped me with a complex tax issue related to foreign income. She was thorough, knowledgeable, and saved me from significant penalties.",
+        service: "Tax Consultation",
+        verified: true
+      },
+      {
+        id: "rev2",
+        name: "Priya Kapoor",
+        date: "June 12, 2023",
+        rating: 4.5,
+        comment: "Very professional service for my business tax filing. She identified several deductions I wasn't aware of and helped optimize my tax structure.",
+        service: "Business Tax Filing",
+        verified: true
+      },
+      {
+        id: "rev3",
+        name: "Vivek Sinha",
+        avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+        date: "May 3, 2023",
+        rating: 5,
+        comment: "Exceptional knowledge of GST procedures. Aishwarya helped my startup get properly registered and set up compliant processes from day one.",
+        service: "GST Registration",
+        verified: true
+      }
+    ],
+    achievements: [
+      {
+        id: "ach1",
+        title: "Certified Public Accountant",
+        issuer: "Institute of Chartered Accountants of India",
+        date: "2014",
+        description: "Professional certification in accounting and tax procedures.",
+        icon: <Award className="h-5 w-5" />
+      },
+      {
+        id: "ach2",
+        title: "GST Compliance Expert",
+        issuer: "National Academy of Customs, Indirect Taxes and Narcotics",
+        date: "2018",
+        description: "Specialized certification in GST compliance and procedures.",
+        icon: <Award className="h-5 w-5" />
+      },
+      {
+        id: "ach3",
+        title: "Tax Professional of the Year",
+        issuer: "Bangalore Chamber of Commerce",
+        date: "2021",
+        description: "Recognized for excellence in tax advisory services and client satisfaction.",
+        icon: <Star className="h-5 w-5" />
+      }
+    ],
+    experience_details: [
+      {
+        id: "exp1",
+        role: "Senior Tax Consultant",
+        company: "TaxPro Solutions",
+        period: "2018 - Present",
+        description: "Providing comprehensive tax services to individuals and businesses, handling complex tax situations, and representing clients during tax audits."
+      },
+      {
+        id: "exp2",
+        role: "Tax Advisor",
+        company: "Ernst & Young",
+        period: "2014 - 2018",
+        description: "Advised corporate clients on tax optimization strategies, ensuring compliance with changing regulations, and preparing detailed tax reports."
+      },
+      {
+        id: "exp3",
+        role: "Junior Tax Associate",
+        company: "KPMG",
+        period: "2011 - 2014",
+        description: "Assisted with tax return preparation for high-net-worth individuals and small businesses, researched tax laws, and prepared client documentation."
+      }
+    ],
+    education: [
+      {
+        id: "edu1",
+        degree: "Master's in Taxation Law",
+        institution: "National Law School of India University",
+        year: "2013"
+      },
+      {
+        id: "edu2",
+        degree: "Bachelor's in Commerce",
+        institution: "Bangalore University",
+        year: "2010"
+      }
+    ],
+    successRate: 96,
+    clientsServed: 850,
+    completedCases: 820,
+    responseTime: "Within 1 hour",
+    successfulCases: [
+      {
+        id: "case1",
+        title: "Income Tax Audit Defense",
+        description: "Successfully represented a client during a comprehensive income tax audit, resulting in significant reduction of initially proposed penalties.",
+        date: "January 2023",
+        category: "Tax Audit",
+        outcome: "Penalty reduced by 85%"
+      },
+      {
+        id: "case2",
+        title: "Corporate Tax Restructuring",
+        description: "Helped a growing tech startup restructure their tax approach, ensuring compliance while optimizing deductions and credits.",
+        date: "October 2022",
+        category: "Corporate Taxation",
+        outcome: "Saved ₹12 lakhs in annual tax liability"
+      },
+      {
+        id: "case3",
+        title: "International Income Reporting",
+        description: "Assisted an NRI client in properly reporting foreign income and investments while maximizing available treaty benefits.",
+        date: "March 2023",
+        category: "International Taxation",
+        outcome: "Full compliance achieved with optimal tax outcomes"
+      }
+    ]
+  },
+  // New expert #4
+  {
+    id: 4,
+    name: "Dr. Vikram Desai",
+    image: "https://randomuser.me/api/portraits/men/75.jpg",
+    field: "Medical Insurance",
+    specialization: ["Policy Claims", "Coverage Disputes", "Insurance Appeals", "Medical Billing", "Policy Selection"],
+    rating: 4.9,
+    experience: 15,
+    rate: 18,
+    languages: ["English", "Hindi", "Tamil", "Kannada"],
+    bio: "Dr. Vikram Desai combines medical expertise with deep knowledge of health insurance systems. With 15 years of experience as both a practicing physician and insurance consultant, he specializes in helping patients navigate complex insurance claims, dispute denials, and maximize their coverage benefits. He has successfully helped over 1,000 clients receive the insurance payouts they deserve.",
+    location: "Chennai, Tamil Nadu",
+    phone: "+91 9876543213",
+    email: "vikram.desai@example.com",
+    availability: [
+      { day: "Monday", slots: ["10:30 AM", "12:00 PM", "3:30 PM", "5:00 PM"] },
+      { day: "Tuesday", slots: ["10:30 AM", "12:00 PM", "3:30 PM", "5:00 PM"] },
+      { day: "Thursday", slots: ["10:30 AM", "12:00 PM", "3:30 PM"] },
+      { day: "Friday", slots: ["10:30 AM", "12:00 PM", "3:30 PM", "5:00 PM"] },
+    ],
+    reviews: [
+      {
+        id: "rev1",
+        name: "Lakshmi Narayan",
+        avatar: "https://randomuser.me/api/portraits/women/62.jpg",
+        date: "August 5, 2023",
+        rating: 5,
+        comment: "Dr. Desai helped us appeal a rejected claim for my father's surgery. His expertise was invaluable, and we received the full coverage amount after his intervention.",
+        service: "Claim Appeal",
+        verified: true
+      },
+      {
+        id: "rev2",
+        name: "Sanjay Mehta",
+        date: "July 14, 2023",
+        rating: 5,
+        comment: "When my insurance company initially denied coverage for my treatment, Dr. Desai knew exactly how to navigate the appeals process. Couldn't have done it without him!",
+        service: "Coverage Dispute",
+        verified: true
+      },
+      {
+        id: "rev3",
+        name: "Radhika Pillai",
+        avatar: "https://randomuser.me/api/portraits/women/45.jpg",
+        date: "June 22, 2023",
+        rating: 4.5,
+        comment: "Extremely knowledgeable about the intricacies of health insurance policies. He helped me choose the right policy for my family's specific medical needs.",
+        service: "Policy Selection",
+        verified: true
+      }
+    ],
+    achievements: [
+      {
+        id: "ach1",
+        title: "Certified Medical Insurance Specialist",
+        issuer: "Insurance Regulatory and Development Authority of India",
+        date: "2015",
+        description: "Specialized certification in medical insurance claims processing and policy regulations.",
+        icon: <Award className="h-5 w-5" />
+      },
+      {
+        id: "ach2",
+        title: "Healthcare Advocate of the Year",
+        issuer: "Federation of Indian Chambers of Commerce & Industry",
+        date: "2020",
+        description: "Recognized for advocacy work on behalf of patients dealing with insurance companies.",
+        icon: <Star className="h-5 w-5" />
+      }
+    ],
+    experience_details: [
+      {
+        id: "exp1",
+        role: "Medical Insurance Consultant",
+        company: "HealthClaim Advocates",
+        period: "2014 - Present",
+        description: "Helping patients navigate insurance claims, appeals, and disputes. Specializing in complex cases involving high-value treatments and chronic conditions."
+      },
+      {
+        id: "exp2",
+        role: "Medical Director",
+        company: "Apollo Hospital Insurance Department",
+        period: "2010 - 2014",
+        description: "Oversaw insurance verifications, claims processing, and patient advocacy for one of India's largest hospital networks."
+      }
+    ],
+    education: [
+      {
+        id: "edu1",
+        degree: "M.D. in Internal Medicine",
+        institution: "All India Institute of Medical Sciences",
+        year: "2008"
+      },
+      {
+        id: "edu2",
+        degree: "MBBS",
+        institution: "Christian Medical College, Vellore",
+        year: "2003"
+      }
+    ],
+    successRate: 94,
+    clientsServed: 1250,
+    completedCases: 1180,
+    responseTime: "Same day",
+    successfulCases: [
+      {
+        id: "case1",
+        title: "Cancer Treatment Coverage Appeal",
+        description: "Successfully appealed a denied claim for advanced cancer treatment, helping the patient receive full coverage for a ₹32 lakh procedure.",
+        date: "February 2023",
+        category: "Major Medical Claim",
+        outcome: "Full coverage approved after initial denial"
+      },
+      {
+        id: "case2",
+        title: "Pre-existing Condition Dispute",
+        description: "Challenged an insurance company's classification of a condition as pre-existing, providing medical evidence that successfully reversed their decision.",
+        date: "November 2022",
+        category: "Coverage Dispute",
+        outcome: "Claim approved with full benefits"
+      }
+    ]
+  },
+  // New expert #5
+  {
+    id: 5,
+    name: "Sunita Agarwal",
+    image: "https://randomuser.me/api/portraits/women/65.jpg",
+    field: "Education & Scholarships",
+    specialization: ["Scholarship Applications", "University Admissions", "Education Loans", "Foreign University Applications", "Study Abroad Counseling"],
+    rating: 4.8,
+    experience: 14,
+    rate: 12,
+    languages: ["English", "Hindi", "Bengali"],
+    bio: "Sunita Agarwal is an education counselor with 14 years of experience helping students navigate admissions and scholarship processes both in India and abroad. She specializes in identifying scholarship opportunities, preparing compelling applications, and guiding students through university admissions. Her expertise has helped over 2,000 students secure admissions and over ₹40 crores in total scholarship funding.",
+    location: "Kolkata, West Bengal",
+    phone: "+91 9876543214",
+    email: "sunita.agarwal@example.com",
+    availability: [
+      { day: "Monday", slots: ["9:00 AM", "10:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"] },
+      { day: "Tuesday", slots: ["9:00 AM", "10:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"] },
+      { day: "Wednesday", slots: ["9:00 AM", "10:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"] },
+      { day: "Friday", slots: ["9:00 AM", "10:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"] },
+      { day: "Saturday", slots: ["9:00 AM", "10:30 AM", "12:00 PM"] },
+    ],
+    reviews: [
+      {
+        id: "rev1",
+        name: "Rohan Das",
+        avatar: "https://randomuser.me/api/portraits/men/72.jpg",
+        date: "August 12, 2023",
+        rating: 5,
+        comment: "Ms. Agarwal helped me secure a full scholarship to my dream university in the USA. Her guidance through the application process was invaluable.",
+        service: "Scholarship Application",
+        verified: true
+      },
+      {
+        id: "rev2",
+        name: "Nisha Sharma",
+        date: "July 23, 2023",
+        rating: 4.5,
+        comment: "Excellent support for my son's undergraduate applications. She helped us navigate the complex admission requirements for multiple universities.",
+        service: "University Admissions",
+        verified: true
+      },
+      {
+        id: "rev3",
+        name: "Aryan Khanna",
+        avatar: "https://randomuser.me/api/portraits/men/35.jpg",
+        date: "June 14, 2023",
+        rating: 5,
+        comment: "The education loan process was so smooth with Sunita's help. She knew exactly what documentation was needed and helped us prepare everything perfectly.",
+        service: "Education Loan Guidance",
+        verified: true
+      }
+    ],
+    achievements: [
+      {
+        id: "ach1",
+        title: "Certified Education Counselor",
+        issuer: "International Association of College Admission Counseling",
+        date: "2012",
+        description: "Professional certification in university admissions counseling.",
+        icon: <Award className="h-5 w-5" />
+      },
+      {
+        id: "ach2",
+        title: "Scholarship Facilitation Excellence Award",
+        issuer: "Association of Indian Education Consultants",
+        date: "2019",
+        description: "Recognized for exceptional success in helping students secure scholarships.",
+        icon: <Star className="h-5 w-5" />
+      }
+    ],
+    experience_details: [
+      {
+        id: "exp1",
+        role: "Senior Education Counselor",
+        company: "Global Education Pathways",
+        period: "2015 - Present",
+        description: "Providing comprehensive guidance for university admissions, scholarship applications, and study abroad planning. Specializing in US, UK, Canada, and Australia admissions."
+      },
+      {
+        id: "exp2",
+        role: "University Relations Manager",
+        company: "IDP Education",
+        period: "2010 - 2015",
+        description: "Managed relationships with partner universities, stayed updated on admission requirements, and counseled students on university selection and application strategies."
+      }
+    ],
+    education: [
+      {
+        id: "edu1",
+        degree: "Master's in Education Administration",
+        institution: "Jadavpur University",
+        year: "2009"
+      },
+      {
+        id: "edu2",
+        degree: "Bachelor's in English Literature",
+        institution: "Calcutta University",
+        year: "2006"
+      }
+    ],
+    successRate: 89,
+    clientsServed: 2150,
+    completedCases: 1920,
+    responseTime: "Under 4 hours",
+    successfulCases: [
+      {
+        id: "case1",
+        title: "Full Scholarship to MIT",
+        description: "Guided a student from application to securing a full scholarship to Massachusetts Institute of Technology for Computer Science program.",
+        date: "January 2023",
+        category: "Scholarship Application",
+        outcome: "Full scholarship worth $320,000"
+      },
+      {
+        id: "case2",
+        title: "Multiple University Admissions with Scholarships",
+        description: "Helped a student secure admissions to 6 top universities with scholarship offers, allowing them to make the best choice for their academic and financial situation.",
+        date: "December 2022",
+        category: "University Admissions",
+        outcome: "Admission to all 6 universities with scholarships ranging from 25% to 75%"
+      }
+    ]
+  }
 ];
 
 // Simplified version of experts array for the card view
@@ -390,6 +783,18 @@ const Experts = () => {
     ? expertDetailsData.find(expert => expert.id === selectedExpertId) 
     : null;
 
+  const refreshExpertAvailability = async () => {
+    if (selectedExpertId) {
+      // In a real app, you'd fetch fresh data from the server
+      // For this demo we're just closing and reopening the modal 
+      // to trigger a fresh data load
+      setSelectedExpertId(null);
+      setTimeout(() => {
+        setSelectedExpertId(selectedExpertId);
+      }, 100);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -467,6 +872,7 @@ const Experts = () => {
           onOpenChange={(open) => {
             if (!open) setSelectedExpertId(null);
           }}
+          onBookingSuccess={refreshExpertAvailability}
         />
       )}
       

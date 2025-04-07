@@ -50,6 +50,8 @@ import {
   Clock4
 } from 'lucide-react';
 import ExpertPaymentDialog from '@/components/expert-payment/ExpertPaymentDialog';
+import { AppointmentBooking } from './AppointmentBooking';
+import { toast } from '@/hooks/use-toast';
 
 // Types
 interface Review {
@@ -131,15 +133,18 @@ interface ExpertDetailViewProps {
   expert: ExpertDetails;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onBookingSuccess?: () => Promise<void>;
 }
 
 export const ExpertDetailView: React.FC<ExpertDetailViewProps> = ({ 
   expert, 
   open, 
-  onOpenChange 
+  onOpenChange,
+  onBookingSuccess
 }) => {
   const [activeTab, setActiveTab] = useState('profile');
   const [paymentDialogOpen, setPaymentDialogOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   // Helper to render star rating
   const StarRating = ({ rating }: { rating: number }) => {
@@ -225,10 +230,16 @@ export const ExpertDetailView: React.FC<ExpertDetailViewProps> = ({
                 </div>
                 <div className="flex flex-col items-end gap-2">
                   <div className="text-xl font-bold text-primary">₹{expert.rate}<span className="text-sm font-normal text-muted-foreground">/min</span></div>
-                  <Button className="gap-1" onClick={() => setPaymentDialogOpen(true)}>
-                    <Phone className="h-4 w-4" />
-                    Connect Now
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button variant="outline" className="gap-1" onClick={() => setBookingOpen(true)}>
+                      <Calendar className="h-4 w-4" />
+                      Book
+                    </Button>
+                    <Button className="gap-1" onClick={() => setPaymentDialogOpen(true)}>
+                      <Phone className="h-4 w-4" />
+                      Connect Now
+                    </Button>
+                  </div>
                 </div>
               </div>
             </DialogHeader>
@@ -388,10 +399,16 @@ export const ExpertDetailView: React.FC<ExpertDetailViewProps> = ({
                             <MessageSquare className="h-4 w-4 mr-3 text-muted-foreground" />
                             <span>Message via app</span>
                           </div>
-                          <Button className="w-full mt-2" onClick={() => setPaymentDialogOpen(true)}>
-                            <Phone className="h-4 w-4 mr-2" />
-                            Book Consultation
-                          </Button>
+                          <div className="flex gap-2 mt-2">
+                            <Button className="w-full" onClick={() => setPaymentDialogOpen(true)}>
+                              <Phone className="h-4 w-4 mr-2" />
+                              Call Now
+                            </Button>
+                            <Button variant="outline" className="w-full" onClick={() => setBookingOpen(true)}>
+                              <Calendar className="h-4 w-4 mr-2" />
+                              Book Appointment
+                            </Button>
+                          </div>
                         </CardContent>
                       </Card>
 
@@ -622,7 +639,7 @@ export const ExpertDetailView: React.FC<ExpertDetailViewProps> = ({
                             <CardContent className="py-3 px-4">
                               <div className="grid grid-cols-2 gap-2">
                                 {day.slots.map((slot, index) => (
-                                  <Button key={index} variant="outline" className="text-xs justify-start">
+                                  <Button key={index} variant="outline" className="text-xs justify-start" onClick={() => setBookingOpen(true)}>
                                     <Clock className="h-3.5 w-3.5 mr-1.5" />
                                     {slot}
                                   </Button>
@@ -650,11 +667,57 @@ export const ExpertDetailView: React.FC<ExpertDetailViewProps> = ({
                     Save as PDF
                   </Button>
                 </div>
-                <Button size="sm" onClick={() => setPaymentDialogOpen(true)}>
-                  <Phone className="h-4 w-4 mr-2" />
-                  Connect Now
-                </Button>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" onClick={() => setBookingOpen(true)}>
+                    <Calendar className="h-4 w-4 mr-2" />
+                    Book Appointment
+                  </Button>
+                  <Button size="sm" onClick={() => setPaymentDialogOpen(true)}>
+                    <Phone className="h-4 w-4 mr-2" />
+                    Connect Now
+                  </Button>
+                </div>
               </div>
+            </DialogFooter>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Booking Dialog */}
+      <Dialog open={bookingOpen} onOpenChange={setBookingOpen}>
+        <DialogContent className="max-w-md max-h-[90vh] overflow-hidden p-0">
+          <div className="flex flex-col h-full">
+            <DialogHeader className="px-6 pt-6 pb-2">
+              <DialogTitle>Book an Appointment</DialogTitle>
+              <DialogDescription>
+                Select a date and time to book with {expert.name}
+              </DialogDescription>
+            </DialogHeader>
+            
+            <ScrollArea className="flex-1 px-6 py-4">
+              <AppointmentBooking 
+                expertId={expert.id} 
+                expertName={expert.name}
+                onSuccess={() => {
+                  toast({
+                    title: "Appointment booked!",
+                    description: `Your appointment with ${expert.name} has been confirmed.`,
+                    variant: "default"
+                  });
+                  
+                  // Close booking dialog
+                  setBookingOpen(false);
+                  
+                  // Call the callback if provided
+                  onBookingSuccess?.();
+                }}
+              />
+            </ScrollArea>
+            
+            <DialogFooter className="px-6 py-4 border-t">
+              <Button variant="outline" onClick={() => setBookingOpen(false)}>
+                Cancel
+              </Button>
             </DialogFooter>
           </div>
         </DialogContent>

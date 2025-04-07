@@ -9,7 +9,6 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import ProtectedRoute from "./components/ProtectedRoute";
 import Index from "./pages/Index";
 import ProcessGenerator from "./pages/ProcessGenerator";
-import { lazy, Suspense } from 'react';
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
@@ -23,8 +22,6 @@ import LanguageDemo from "./pages/LanguageDemo";
 
 // Create a client
 const queryClient = new QueryClient();
-
-const DocumentCreator = lazy(() => import('./pages/DocumentCreator'));
 
 const App = () => {
   // Google Client ID - Replace with your actual Client ID
@@ -54,13 +51,6 @@ const App = () => {
                   <Route path="/process-generator" element={
                     <ProtectedRoute>
                       <ProcessGenerator />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/document-creator" element={
-                    <ProtectedRoute>
-                      <Suspense fallback={<div>Loading...</div>}>
-                        <DocumentCreator />
-                      </Suspense>
                     </ProtectedRoute>
                   } />
                   <Route path="/login" element={<Login />} />
