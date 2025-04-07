@@ -1,11 +1,11 @@
-
 export interface DocumentField {
   name: string;
   label: string;
-  type: 'text' | 'textarea' | 'select';
-  options?: string[];
+  type: 'text' | 'textarea' | 'select' | 'date' | 'number';
+  required: boolean;
   placeholder?: string;
-  required?: boolean;
+  options?: string[];
+  defaultValue?: string;
 }
 
 export interface DocumentTemplate {
@@ -14,5 +14,6 @@ export interface DocumentTemplate {
   description: string;
   type: string;
   fields: DocumentField[];
-  sampleDocument: string;
+  templateString: string;
+  disclaimer?: string;
 }

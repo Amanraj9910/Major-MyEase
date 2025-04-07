@@ -3,63 +3,185 @@ import i18n from 'i18next';
 
 export const documentTemplates: DocumentTemplate[] = [
   {
-    id: 'affidavit',
-    name: 'General Affidavit',
-    description: 'A general purpose affidavit for legal declarations',
-    type: 'Legal',
+    id: 'authorization-letter',
+    name: 'Authorization Letter',
+    description: 'Authorize someone to act on your behalf for specific purposes',
+    type: 'Private',
     fields: [
-      { name: 'fullName', label: 'Full Name', type: 'text', placeholder: 'Enter your full name', required: true },
-      { name: 'address', label: 'Complete Address', type: 'textarea', placeholder: 'Enter your full address', required: true },
-      { name: 'purpose', label: 'Purpose of Affidavit', type: 'textarea', placeholder: 'Describe the purpose of this affidavit', required: true },
-      { name: 'state', label: 'State', type: 'select', options: ['Delhi', 'Maharashtra', 'Tamil Nadu', 'Karnataka', 'Uttar Pradesh'], required: true }
+      { name: 'authorName', label: 'Your Full Name', type: 'text', placeholder: 'Your full name', required: true },
+      { name: 'authorAddress', label: 'Your Address', type: 'textarea', placeholder: 'Your complete address', required: true },
+      { name: 'authorContact', label: 'Your Contact Number', type: 'text', placeholder: 'Your phone number', required: true },
+      { name: 'recipientName', label: 'Name of Authorized Person', type: 'text', placeholder: 'Full name of person you are authorizing', required: true },
+      { name: 'recipientRelation', label: 'Relationship to You', type: 'text', placeholder: 'e.g., Friend, Brother, Colleague', required: true },
+      { name: 'purpose', label: 'Purpose of Authorization', type: 'textarea', placeholder: 'Describe what actions you are authorizing them to take', required: true },
+      { name: 'validityPeriod', label: 'Validity Period', type: 'text', placeholder: 'e.g., Until December 31, 2023', required: true }
     ],
-    sampleDocument: `AFFIDAVIT
+    templateString: `AUTHORIZATION LETTER
 
-I, [fullName], son/daughter of ____________, resident of [address], do hereby solemnly affirm and declare as follows:
+Date: [CurrentDate]
 
-1. That I am a citizen of India.
-2. [purpose]
+FROM:
+[authorName]
+[authorAddress]
+Contact: [authorContact]
 
-I solemnly declare that the information provided above is true to the best of my knowledge and belief.
+SUBJECT: Letter of Authorization
 
-Place: [state]
-Date: [Current Date]
+TO WHOM IT MAY CONCERN:
 
-Deponent
+I, [authorName], hereby authorize [recipientName], who is my [recipientRelation], to act on my behalf regarding the following matter(s):
 
-Verification: Verified at [state] on this [Current Date] that the contents of the above affidavit are true and correct to the best of my knowledge and belief.
+[purpose]
 
-Deponent`
+This authorization is valid [validityPeriod].
+
+Please provide [recipientName] with all the necessary assistance and extend the same courtesy as you would to me.
+
+If you need to verify this authorization, please contact me at [authorContact].
+
+Thanking you,
+
+Sincerely,
+
+____________________
+[authorName]
+(Signature)
+
+____________________
+[recipientName]
+(Signature of Authorized Person)`,
+    disclaimer: 'This is a general authorization letter that does not transfer any legal powers of attorney. For legal power of attorney, consult a legal professional.'
   },
   {
-    id: 'noc',
-    name: 'No Objection Certificate',
-    description: 'NOC for various purposes like employment, education, etc.',
-    type: 'Employment/Education',
+    id: 'job-application',
+    name: 'Job Application Letter',
+    description: 'A formal letter applying for a job position',
+    type: 'Employment',
     fields: [
-      { name: 'issuerName', label: 'Issuer Name/Organization', type: 'text', placeholder: 'Name of person/organization issuing NOC', required: true },
-      { name: 'issuerAddress', label: 'Issuer Address', type: 'textarea', placeholder: 'Complete address of issuer', required: true },
-      { name: 'recipientName', label: 'Recipient Name', type: 'text', placeholder: 'Name of person receiving NOC', required: true },
-      { name: 'purpose', label: 'Purpose of NOC', type: 'select', options: ['Employment', 'Education', 'Travel', 'Property', 'Other'], required: true },
-      { name: 'details', label: 'Specific Details', type: 'textarea', placeholder: 'Specific details regarding the NOC', required: true }
+      { name: 'applicantName', label: 'Your Full Name', type: 'text', placeholder: 'Your full name', required: true },
+      { name: 'applicantAddress', label: 'Your Address', type: 'textarea', placeholder: 'Your complete address', required: true },
+      { name: 'applicantContact', label: 'Your Contact Number', type: 'text', placeholder: 'Your phone number', required: true },
+      { name: 'applicantEmail', label: 'Your Email', type: 'text', placeholder: 'Your email address', required: true },
+      { name: 'date', label: 'Date', type: 'date', required: true },
+      { name: 'recipientName', label: 'Recipient Name', type: 'text', placeholder: 'e.g., Hiring Manager, HR Manager', required: true },
+      { name: 'companyName', label: 'Company Name', type: 'text', placeholder: 'Name of the company', required: true },
+      { name: 'companyAddress', label: 'Company Address', type: 'textarea', placeholder: 'Company address', required: true },
+      { name: 'position', label: 'Position Applied For', type: 'text', placeholder: 'Job title', required: true },
+      { name: 'source', label: 'Where You Found the Job', type: 'text', placeholder: 'e.g., Company Website, LinkedIn, Newspaper', required: true },
+      { name: 'introduction', label: 'Introduction Paragraph', type: 'textarea', placeholder: 'Introduce yourself and express interest in the position', required: true },
+      { name: 'qualifications', label: 'Your Qualifications', type: 'textarea', placeholder: 'Describe your qualifications, experience, and skills relevant to the position', required: true },
+      { name: 'closing', label: 'Closing Paragraph', type: 'textarea', placeholder: 'Express enthusiasm, request interview, and thank them', required: true }
     ],
-    sampleDocument: `NO OBJECTION CERTIFICATE
+    templateString: `[applicantName]
+[applicantAddress]
+Phone: [applicantContact]
+Email: [applicantEmail]
 
-Date: [Current Date]
+[date]
 
-TO WHOMSOEVER IT MAY CONCERN
+[recipientName]
+[companyName]
+[companyAddress]
 
-This is to certify that [issuerName], having its office at [issuerAddress], has no objection to [recipientName] for the purpose of [purpose].
+Subject: Application for the Position of [position]
 
-[details]
+Dear [recipientName],
 
-We wish them all the best in their future endeavors.
+[introduction]
 
-For [issuerName],
+[qualifications]
 
-Authorized Signatory
-(Name and Designation)
-Contact: _____________`
+[closing]
+
+Sincerely,
+
+[applicantName]`,
+    disclaimer: 'This is a template for a job application letter. Modify it to suit the specific requirements of the position and company you are applying to.'
+  },
+  {
+    id: 'resignation-letter',
+    name: 'Resignation Letter',
+    description: 'Formal letter to resign from a position',
+    type: 'Employment',
+    fields: [
+      { name: 'employeeName', label: 'Your Full Name', type: 'text', placeholder: 'Your full name', required: true },
+      { name: 'employeeAddress', label: 'Your Address', type: 'textarea', placeholder: 'Your complete address', required: false },
+      { name: 'employeeContact', label: 'Your Contact Details', type: 'text', placeholder: 'Phone number and/or email', required: true },
+      { name: 'date', label: 'Date', type: 'date', required: true },
+      { name: 'managerName', label: 'Manager\'s Name', type: 'text', placeholder: 'Your manager or supervisor\'s name', required: true },
+      { name: 'managerTitle', label: 'Manager\'s Title', type: 'text', placeholder: 'e.g., HR Manager, Department Head', required: true },
+      { name: 'companyName', label: 'Company Name', type: 'text', placeholder: 'Name of your current employer', required: true },
+      { name: 'lastWorkDay', label: 'Last Working Day', type: 'date', required: true },
+      { name: 'reason', label: 'Reason for Resignation (Optional)', type: 'textarea', placeholder: 'Brief explanation of why you\'re leaving', required: false },
+      { name: 'gratitude', label: 'Expression of Gratitude', type: 'textarea', placeholder: 'Thank the company for the opportunities provided', required: true },
+      { name: 'transitionPlan', label: 'Transition Plan', type: 'textarea', placeholder: 'How you plan to hand over your responsibilities', required: true }
+    ],
+    templateString: `[employeeName]
+[employeeAddress]
+[employeeContact]
+
+[date]
+
+[managerName]
+[managerTitle]
+[companyName]
+
+Subject: Letter of Resignation
+
+Dear [managerName],
+
+I am writing to inform you of my decision to resign from my position as [position] with [companyName], effective [lastWorkDay].
+
+[reason]
+
+[gratitude]
+
+[transitionPlan]
+
+Please let me know how I can assist in making this transition as smooth as possible.
+
+Sincerely,
+
+[employeeName]`,
+    disclaimer: 'This is a standard resignation letter template. Check your employment contract for any specific resignation requirements.'
+  },
+  {
+    id: 'consent-form',
+    name: 'General Consent Form',
+    description: 'A form granting permission for a specific activity or purpose',
+    type: 'Private',
+    fields: [
+      { name: 'consentorName', label: 'Name of Person Giving Consent', type: 'text', placeholder: 'Your full name', required: true },
+      { name: 'consentorAddress', label: 'Address', type: 'textarea', placeholder: 'Your complete address', required: true },
+      { name: 'consentorContact', label: 'Contact Number', type: 'text', placeholder: 'Your phone number', required: true },
+      { name: 'recipientName', label: 'Name of Recipient/Organization', type: 'text', placeholder: 'Person/Organization receiving consent', required: true },
+      { name: 'purpose', label: 'Purpose of Consent', type: 'textarea', placeholder: 'Detailed description of what you are consenting to', required: true },
+      { name: 'conditions', label: 'Conditions or Limitations (Optional)', type: 'textarea', placeholder: 'Any specific conditions for your consent', required: false },
+      { name: 'validityPeriod', label: 'Validity Period', type: 'text', placeholder: 'How long this consent is valid for', required: true }
+    ],
+    templateString: `CONSENT FORM
+
+Date: [CurrentDate]
+
+I, [consentorName], residing at [consentorAddress], contact number [consentorContact], hereby give my consent to [recipientName] for the following purpose:
+
+[purpose]
+
+Conditions or Limitations:
+[conditions]
+
+This consent is valid for [validityPeriod].
+
+I understand that I have the right to withdraw my consent at any time by providing written notice.
+
+By signing below, I confirm that I have read and understood this consent form and agree to its terms.
+
+Signed on [CurrentDate]:
+
+____________________
+[consentorName]
+(Signature)`,
+    disclaimer: 'This is a general consent form template. For sensitive matters or legal situations, consult a legal professional to ensure the consent form meets all requirements.'
   },
   {
     id: 'rental',
@@ -68,147 +190,319 @@ Contact: _____________`
     type: 'Property',
     fields: [
       { name: 'ownerName', label: 'Owner/Landlord Name', type: 'text', placeholder: 'Full name of the property owner', required: true },
+      { name: 'ownerAddress', label: 'Owner Address', type: 'textarea', placeholder: 'Owner\'s complete address', required: true },
+      { name: 'ownerContact', label: 'Owner Contact Details', type: 'text', placeholder: 'Phone number and/or email', required: true },
       { name: 'tenantName', label: 'Tenant Name', type: 'text', placeholder: 'Full name of the tenant', required: true },
+      { name: 'tenantContact', label: 'Tenant Contact Details', type: 'text', placeholder: 'Phone number and/or email', required: true },
       { name: 'propertyAddress', label: 'Property Address', type: 'textarea', placeholder: 'Complete address of the rental property', required: true },
+      { name: 'propertyDetails', label: 'Property Details', type: 'textarea', placeholder: 'Brief description of the property (e.g., 2BHK, amenities)', required: true },
       { name: 'rentAmount', label: 'Monthly Rent (₹)', type: 'text', placeholder: 'Amount in rupees', required: true },
       { name: 'depositAmount', label: 'Security Deposit (₹)', type: 'text', placeholder: 'Amount in rupees', required: true },
-      { name: 'tenancyPeriod', label: 'Tenancy Period (months)', type: 'select', options: ['3', '6', '11', '12', '24', '36'], required: true }
+      { name: 'leaseStart', label: 'Lease Start Date', type: 'date', required: true },
+      { name: 'leaseDuration', label: 'Lease Duration', type: 'text', placeholder: 'e.g., 11 months, 1 year', required: true },
+      { name: 'paymentDue', label: 'Rent Payment Due Date', type: 'text', placeholder: 'e.g., 5th of every month', required: true },
+      { name: 'utilities', label: 'Utilities Responsibility', type: 'textarea', placeholder: 'Who pays for electricity, water, maintenance, etc.', required: true },
+      { name: 'specialTerms', label: 'Special Terms & Conditions', type: 'textarea', placeholder: 'Any additional terms', required: false }
     ],
-    sampleDocument: `RENTAL AGREEMENT
+    templateString: `RENTAL AGREEMENT
 
-This RENTAL AGREEMENT is made on [Current Date] between [ownerName] (hereinafter referred to as the "LANDLORD") and [tenantName] (hereinafter referred to as the "TENANT").
+THIS RENTAL AGREEMENT is made and executed on [CurrentDate] at [propertyAddress]
 
-PROPERTY:
-The Landlord hereby agrees to rent the residential property located at [propertyAddress] to the Tenant.
+BETWEEN
 
-TERM:
-The term of this agreement shall be for a period of [tenancyPeriod] months, commencing from [Current Date].
+[ownerName], residing at [ownerAddress], Contact: [ownerContact], hereinafter referred to as the "LANDLORD/OWNER" (which expression shall include their heirs, successors, executors, and assigns) of the ONE PART
 
-RENT:
-The Tenant agrees to pay a monthly rent of ₹[rentAmount] payable on or before the 5th day of each month.
+AND
 
-SECURITY DEPOSIT:
-The Tenant has paid a security deposit of ₹[depositAmount] which will be refunded at the end of the tenancy, subject to deductions for damages if any.
+[tenantName], Contact: [tenantContact], hereinafter referred to as the "TENANT" (which expression shall include their heirs, successors, executors, and assigns) of the OTHER PART.
 
-SIGNATORIES:
+PROPERTY DETAILS:
+The Landlord is the lawful owner of the property located at [propertyAddress] with the following details: [propertyDetails], hereinafter referred to as the "PREMISES".
 
-__________________
-(Landlord)
-[ownerName]
+TERMS AND CONDITIONS:
 
-__________________
-(Tenant)
-[tenantName]
+1. RENT AND DEPOSIT:
+   - The Tenant agrees to pay a monthly rent of ₹[rentAmount].
+   - The rent shall be payable on or before [paymentDue] of each month.
+   - The Tenant has paid a refundable security deposit of ₹[depositAmount], which will be returned at the end of the tenancy, subject to deductions for damages, if any.
 
-__________________
-(Witness 1)
+2. DURATION:
+   - This agreement shall commence from [leaseStart] for a period of [leaseDuration].
 
-__________________
-(Witness 2)`
+3. UTILITIES AND MAINTENANCE:
+   [utilities]
+
+4. SPECIAL TERMS:
+   [specialTerms]
+
+5. TERMINATION:
+   - Either party may terminate this agreement by giving one month's written notice.
+   - The Landlord may terminate this agreement immediately if the Tenant fails to pay rent for two consecutive months or breaches any terms of this agreement.
+
+IN WITNESS WHEREOF, the parties have set their hands on the day, month, and year first above written.
+
+LANDLORD/OWNER:                         TENANT:
+
+____________________                    ____________________
+[ownerName]                             [tenantName]
+
+WITNESS 1:                              WITNESS 2:
+
+____________________                    ____________________
+Name:                                   Name:
+Address:                                Address:`,
+    disclaimer: 'This is a general rental agreement template. Local rental laws and regulations may require specific clauses or registrations. For long-term or high-value rentals, consider consulting a legal professional.'
   },
   {
-    id: 'will',
-    name: 'Simple Will',
-    description: 'Basic last will and testament document',
-    type: 'Legal',
+    id: 'roommate-agreement',
+    name: 'Roommate Agreement',
+    description: 'Agreement between roommates sharing living space',
+    type: 'Private',
     fields: [
-      { name: 'testatorName', label: 'Full Name of Testator', type: 'text', placeholder: 'Your full legal name', required: true },
-      { name: 'testatorAddress', label: 'Testator Address', type: 'textarea', placeholder: 'Your full current address', required: true },
-      { name: 'executorName', label: 'Name of Executor', type: 'text', placeholder: 'Full name of the person executing your will', required: true },
-      { name: 'executorAddress', label: 'Executor Address', type: 'textarea', placeholder: 'Full address of the executor', required: true },
-      { name: 'bequests', label: 'Bequests and Distribution', type: 'textarea', placeholder: 'Describe how your assets should be distributed', required: true }
+      { name: 'address', label: 'Shared Residence Address', type: 'textarea', placeholder: 'Complete address of the shared residence', required: true },
+      { name: 'roommateNames', label: 'Names of All Roommates', type: 'textarea', placeholder: 'List all roommates, one per line', required: true },
+      { name: 'moveInDate', label: 'Move-in Date', type: 'date', required: true },
+      { name: 'rentTotal', label: 'Total Monthly Rent (₹)', type: 'text', placeholder: 'Total rent for the property', required: true },
+      { name: 'rentDivision', label: 'Rent Division', type: 'textarea', placeholder: 'How the rent is divided between roommates', required: true },
+      { name: 'utilities', label: 'Utilities Division', type: 'textarea', placeholder: 'How utility bills are divided', required: true },
+      { name: 'commonAreas', label: 'Common Areas Use', type: 'textarea', placeholder: 'Rules for using common areas', required: true },
+      { name: 'chores', label: 'Household Chores', type: 'textarea', placeholder: 'Division of household chores', required: true },
+      { name: 'guests', label: 'Guest Policy', type: 'textarea', placeholder: 'Rules for having guests over', required: true },
+      { name: 'noise', label: 'Quiet Hours', type: 'text', placeholder: 'e.g., 10 PM to 7 AM on weekdays', required: true },
+      { name: 'disputes', label: 'Dispute Resolution Process', type: 'textarea', placeholder: 'How roommates will resolve disputes', required: true },
+      { name: 'moveOut', label: 'Move-out Procedure', type: 'textarea', placeholder: 'Notice period and process for moving out', required: true }
     ],
-    sampleDocument: `LAST WILL AND TESTAMENT
+    templateString: `ROOMMATE AGREEMENT
 
-I, [testatorName], residing at [testatorAddress], being of sound mind and memory, do hereby make, publish, and declare this to be my Last Will and Testament, hereby revoking all previous wills and codicils made by me.
+Date: [CurrentDate]
 
-1. I appoint [executorName], residing at [executorAddress], as the Executor of this my Last Will and Testament.
+This Roommate Agreement ("Agreement") is entered into by and between the following roommates:
+[roommateNames]
 
-2. BEQUESTS:
-[bequests]
+For the shared residence located at:
+[address]
 
-3. I direct that all my just debts, funeral expenses, and administration expenses be paid as soon as practicable after my death.
+Move-in Date: [moveInDate]
 
-IN WITNESS WHEREOF, I have hereunto set my hand this [Current Date].
+1. RENT
+Total monthly rent: ₹[rentTotal]
+Rent division among roommates:
+[rentDivision]
 
-__________________
-[testatorName]
-(Testator)
+2. UTILITIES
+Division of utility bills:
+[utilities]
 
-SIGNED by the above-named Testator as their Last Will in our presence, and we, at their request and in their presence, and in the presence of each other, have hereunto subscribed our names as witnesses.
+3. COMMON AREAS
+Rules for the use of common areas:
+[commonAreas]
 
-__________________
-Witness 1
-Name:
-Address:
+4. HOUSEHOLD CHORES
+Division of household responsibilities:
+[chores]
 
-__________________
-Witness 2
-Name:
-Address:`
+5. GUEST POLICY
+[guests]
+
+6. QUIET HOURS
+[noise]
+
+7. DISPUTE RESOLUTION
+[disputes]
+
+8. MOVE-OUT PROCEDURE
+[moveOut]
+
+9. AMENDMENTS
+This Agreement may be amended at any time with the written consent of all roommates.
+
+By signing below, each roommate acknowledges that they have read, understood, and agree to abide by the terms of this Agreement.
+
+Signatures:
+
+[Space for each roommate to sign and date]`,
+    disclaimer: 'This roommate agreement is not a substitute for a lease with your landlord. It is a private agreement between roommates to establish house rules and responsibilities.'
   },
   {
-    id: 'promissory',
-    name: 'Promissory Note',
-    description: 'Document acknowledging a debt with promise to repay',
+    id: 'noc-letter',
+    name: 'No Objection Certificate (NOC)',
+    description: 'General purpose No Objection Certificate',
+    type: 'Private',
+    fields: [
+      { name: 'issuerName', label: 'Name of Issuer/Organization', type: 'text', placeholder: 'Your name or organization name', required: true },
+      { name: 'issuerAddress', label: 'Issuer Address', type: 'textarea', placeholder: 'Your complete address', required: true },
+      { name: 'issuerContact', label: 'Issuer Contact Information', type: 'text', placeholder: 'Phone number and/or email', required: true },
+      { name: 'recipientName', label: 'Recipient Full Name', type: 'text', placeholder: 'Name of person receiving the NOC', required: true },
+      { name: 'recipientDesignation', label: 'Recipient Designation/Relation', type: 'text', placeholder: 'e.g., Employee, Student, Tenant', required: true },
+      { name: 'recipientId', label: 'Recipient ID (If applicable)', type: 'text', placeholder: 'e.g., Employee ID, Student ID', required: false },
+      { name: 'purpose', label: 'Purpose of NOC', type: 'textarea', placeholder: 'Detailed purpose for which NOC is being issued', required: true },
+      { name: 'validityPeriod', label: 'Validity Period (If applicable)', type: 'text', placeholder: 'How long this NOC is valid for', required: false },
+      { name: 'additionalInfo', label: 'Additional Information', type: 'textarea', placeholder: 'Any other relevant details', required: false },
+      { name: 'issuerDesignation', label: 'Issuer Designation', type: 'text', placeholder: 'Your title or position', required: false }
+    ],
+    templateString: `NO OBJECTION CERTIFICATE
+
+Date: [CurrentDate]
+
+FROM:
+[issuerName]
+[issuerAddress]
+Contact: [issuerContact]
+
+SUBJECT: No Objection Certificate for [purpose]
+
+TO WHOMSOEVER IT MAY CONCERN:
+
+This is to certify that we have no objection to [recipientName], [recipientDesignation] [recipientId] regarding the purpose of [purpose].
+
+[additionalInfo]
+
+[validityPeriod]
+
+For any clarification regarding this NOC, please contact the undersigned.
+
+Yours faithfully,
+
+____________________
+[issuerName]
+[issuerDesignation]`,
+    disclaimer: 'This is a general No Objection Certificate template. The specific format and content may vary based on organizational requirements. This NOC is a private document and may not be valid for purposes that require government-issued NOCs.'
+  },
+  {
+    id: 'demand-letter',
+    name: 'Payment Demand Letter',
+    description: 'Formal letter demanding payment of outstanding dues',
     type: 'Financial',
     fields: [
-      { name: 'borrowerName', label: 'Borrower Name', type: 'text', placeholder: 'Full name of the borrower', required: true },
-      { name: 'borrowerAddress', label: 'Borrower Address', type: 'textarea', placeholder: 'Full address of the borrower', required: true },
-      { name: 'lenderName', label: 'Lender Name', type: 'text', placeholder: 'Full name of the lender', required: true },
-      { name: 'lenderAddress', label: 'Lender Address', type: 'textarea', placeholder: 'Full address of the lender', required: true },
-      { name: 'loanAmount', label: 'Loan Amount (₹)', type: 'text', placeholder: 'Amount in rupees', required: true },
-      { name: 'interestRate', label: 'Annual Interest Rate (%)', type: 'text', placeholder: 'Interest rate percentage', required: true },
-      { name: 'repaymentTerms', label: 'Repayment Terms', type: 'textarea', placeholder: 'Describe the repayment schedule', required: true }
+      { name: 'senderName', label: 'Your Full Name/Company', type: 'text', placeholder: 'Your name or company name', required: true },
+      { name: 'senderAddress', label: 'Your Address', type: 'textarea', placeholder: 'Your complete address', required: true },
+      { name: 'senderContact', label: 'Your Contact Details', type: 'text', placeholder: 'Phone number and email', required: true },
+      { name: 'receiverName', label: 'Debtor Name', type: 'text', placeholder: 'Person or company that owes you money', required: true },
+      { name: 'receiverAddress', label: 'Debtor Address', type: 'textarea', placeholder: 'Complete address of the debtor', required: true },
+      { name: 'amountDue', label: 'Amount Due (₹)', type: 'text', placeholder: 'Total amount owed to you', required: true },
+      { name: 'dueDate', label: 'Original Due Date', type: 'date', required: true },
+      { name: 'invoiceRef', label: 'Invoice/Reference Number', type: 'text', placeholder: 'Reference number of the original transaction', required: false },
+      { name: 'paymentDetails', label: 'Payment Details', type: 'textarea', placeholder: 'Details about the debt, services provided, etc.', required: true },
+      { name: 'paymentDeadline', label: 'Payment Deadline', type: 'date', required: true },
+      { name: 'paymentMethod', label: 'Preferred Payment Method', type: 'textarea', placeholder: 'Bank details or other payment options', required: true },
+      { name: 'consequences', label: 'Consequences of Non-payment', type: 'textarea', placeholder: 'What will happen if payment is not made by the deadline', required: false }
     ],
-    sampleDocument: `PROMISSORY NOTE
+    templateString: `[senderName]
+[senderAddress]
+[senderContact]
 
-Date: [Current Date]
-Amount: ₹[loanAmount]
+[CurrentDate]
 
-FOR VALUE RECEIVED, the undersigned [borrowerName], residing at [borrowerAddress] (the "Borrower"), promises to pay to the order of [lenderName], residing at [lenderAddress] (the "Lender"), the principal sum of ₹[loanAmount] with interest thereon at the rate of [interestRate]% per annum on the unpaid balance until paid or until default, both principal and interest payable in lawful money of India.
+[receiverName]
+[receiverAddress]
 
-REPAYMENT TERMS:
-[repaymentTerms]
+SUBJECT: DEMAND FOR PAYMENT OF OUTSTANDING DUES - ₹[amountDue]
 
-If any installment payment due under this Note is not received by Lender within 10 calendar days of its due date, the entire amount of unpaid principal and accrued interest shall, at the option of the Lender, become immediately due and payable without prior notice.
+Dear [receiverName],
 
-IN WITNESS WHEREOF, the Borrower has executed this Promissory Note as of the date first written above.
+This letter serves as a formal demand for payment of the outstanding amount of ₹[amountDue] that was due on [dueDate]. Despite the passage of the due date, we have not received your payment.
 
-__________________
-[borrowerName]
-(Borrower)
+Reference: [invoiceRef]
 
-__________________
-Witness
-Name:
-Address:`
+Details of the outstanding payment:
+[paymentDetails]
+
+Please note that this amount must be paid in full by [paymentDeadline].
+
+Payment can be made through the following method:
+[paymentMethod]
+
+If payment is not received by the deadline:
+[consequences]
+
+If you have already made the payment, please disregard this letter and provide us with the payment details for our reference.
+
+If you have any questions or concerns, please contact us at [senderContact].
+
+Sincerely,
+
+[senderName]`,
+    disclaimer: 'This is a private demand letter template for requesting payment. While it may serve as a first step in debt collection, it does not constitute formal legal action. For significant amounts or continual non-payment, consider consulting a legal professional.'
+  },
+  {
+    id: 'receipt-acknowledgment',
+    name: 'Receipt Acknowledgment',
+    description: 'Acknowledge receipt of payment, goods, or documents',
+    type: 'Financial',
+    fields: [
+      { name: 'recipientName', label: 'Your Name/Company', type: 'text', placeholder: 'Person or company receiving payment/items', required: true },
+      { name: 'recipientAddress', label: 'Your Address', type: 'textarea', placeholder: 'Your complete address', required: true },
+      { name: 'recipientContact', label: 'Your Contact Details', type: 'text', placeholder: 'Phone number and/or email', required: true },
+      { name: 'payerName', label: 'Payer/Sender Name', type: 'text', placeholder: 'Person or company that made the payment/sent items', required: true },
+      { name: 'payerAddress', label: 'Payer/Sender Address', type: 'textarea', placeholder: 'Complete address of the payer/sender', required: false },
+      { name: 'receiptType', label: 'Type of Receipt', type: 'select', options: ['Payment', 'Goods', 'Documents', 'Other'], required: true },
+      { name: 'receiptDetails', label: 'Receipt Details', type: 'textarea', placeholder: 'Detailed description of what was received', required: true },
+      { name: 'amount', label: 'Amount (if applicable)', type: 'text', placeholder: 'Amount received in rupees', required: false },
+      { name: 'receiptDate', label: 'Date Received', type: 'date', required: true },
+      { name: 'paymentMethod', label: 'Payment Method (if applicable)', type: 'select', options: ['Cash', 'Cheque', 'Bank Transfer', 'UPI', 'Other'], required: false },
+      { name: 'referenceNumber', label: 'Reference/Transaction Number', type: 'text', placeholder: 'Any reference or tracking number', required: false },
+      { name: 'additionalNotes', label: 'Additional Notes', type: 'textarea', placeholder: 'Any other relevant information', required: false }
+    ],
+    templateString: `RECEIPT ACKNOWLEDGMENT
+
+Date: [CurrentDate]
+
+FROM:
+[recipientName]
+[recipientAddress]
+Contact: [recipientContact]
+
+TO:
+[payerName]
+[payerAddress]
+
+SUBJECT: Acknowledgment of Receipt of [receiptType]
+
+This document acknowledges that I, [recipientName], have received the following from [payerName] on [receiptDate]:
+
+Receipt Details:
+[receiptDetails]
+
+Amount Received: ₹[amount]
+Payment Method: [paymentMethod]
+Reference/Transaction Number: [referenceNumber]
+
+Additional Notes:
+[additionalNotes]
+
+Please retain this acknowledgment for your records.
+
+Sincerely,
+
+____________________
+[recipientName]
+Date: [CurrentDate]`,
+    disclaimer: 'This is a basic receipt acknowledgment form. For tax purposes or formal accounting, you may need to use specific formats required by relevant tax authorities.'
   }
 ];
 
-export const generateDocument = (
+// Function to generate document text from template and data
+export const generateDocumentText = (
   template: DocumentTemplate, 
   formData: Record<string, string>
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
     try {
-      // Get current language
+      let docText = template.templateString;
       const currentLanguage = i18n.language || 'en';
-      console.log(`Generating document in language: ${currentLanguage}`);
       
-      // Simulate API call and processing delay
-      setTimeout(() => {
-        let docText = template.sampleDocument;
-        
-        // Replace placeholders with form data
-        Object.entries(formData).forEach(([key, value]) => {
+      // Replace field placeholders
+      for (const key in formData) {
+        if (formData.hasOwnProperty(key)) {
+          const value = formData[key] || ''; // Use empty string if data is missing
+          // Use a regex to replace all occurrences globally
           docText = docText.replace(new RegExp(`\\[${key}\\]`, 'g'), value);
-        });
+        }
+      }
         
-        // Replace [Current Date] with formatted date in the current language
+      // Replace [CurrentDate] with formatted date
         const now = new Date();
         let formattedDate;
-        
         try {
           formattedDate = new Intl.DateTimeFormat(currentLanguage, {
             year: 'numeric',
@@ -216,16 +510,17 @@ export const generateDocument = (
             day: 'numeric'
           }).format(now);
         } catch (err) {
-          // Fallback to simple date format if the locale is not supported
-          formattedDate = now.toLocaleDateString();
+        formattedDate = now.toLocaleDateString(); // Fallback
         }
+      docText = docText.replace(/\[CurrentDate\]/g, formattedDate);
         
-        docText = docText.replace(/\[Current Date\]/g, formattedDate);
+      // Clean up any remaining placeholders
+      docText = docText.replace(/\[.*?\]/g, '______');
         
         resolve(docText);
-      }, 1500);
     } catch (error) {
-      reject(error);
+      console.error("Error generating document text:", error);
+      reject("Failed to generate document text.");
     }
   });
 };

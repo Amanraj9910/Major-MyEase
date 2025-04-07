@@ -76,11 +76,14 @@ const TaskInput: React.FC<TaskInputProps> = ({
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-6 border border-border/60">
-      <h2 className={`text-xl font-semibold mb-4 flex items-center ${langClass}`}>
-        <ClipboardPenLine className="mr-2 h-5 w-5 text-primary" />
-        {t('process:enter_task')}
+    <div className="w-full max-w-4xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 border border-gray-200 dark:border-gray-800">
+      <h2 className={`text-xl font-semibold mb-4 flex items-center text-gray-800 dark:text-white ${langClass}`}>
+        <ClipboardPenLine className="mr-2 h-5 w-5 text-purple-600 dark:text-purple-400" />
+        {t('process:enter_task')} 
       </h2>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+        {t('process:enter_task_description', { defaultValue: 'Enter any administrative procedure or government service to get a detailed step-by-step guide.' })}
+      </p>
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col md:flex-row gap-3">
@@ -88,10 +91,14 @@ const TaskInput: React.FC<TaskInputProps> = ({
             placeholder={placeholder || t('process:task_placeholder')}
             value={taskInput}
             onChange={handleInputChange}
-            className="flex-grow"
+            className="flex-grow bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700"
             disabled={isLoading}
           />
-          <Button type="submit" disabled={isLoading}>
+          <Button 
+            type="submit" 
+            disabled={isLoading}
+            className="bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white"
+          >
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -104,7 +111,7 @@ const TaskInput: React.FC<TaskInputProps> = ({
         </div>
 
         <div className="mt-4">
-          <p className={`text-sm text-muted-foreground mb-2 ${langClass}`}>{t('process:suggested_tasks')}:</p>
+          <p className={`text-sm text-gray-700 dark:text-gray-300 mb-2 font-medium ${langClass}`}>{t('process:suggested_tasks')}:</p>
           <div className="flex flex-wrap gap-2">
             {predefinedTasks.map((task) => (
               <Button
@@ -112,7 +119,7 @@ const TaskInput: React.FC<TaskInputProps> = ({
                 type="button"
                 variant="outline"
                 size="sm"
-                className={`text-xs ${langClass}`}
+                className={`text-xs border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 ${langClass}`}
                 onClick={() => handleTaskClick(task)}
                 disabled={isLoading}
               >
