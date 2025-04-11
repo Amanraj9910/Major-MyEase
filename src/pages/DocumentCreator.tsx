@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Copy, Download, AlertCircle, FileText, Info, Filter, FileWarning, BookCheck, FileCheck, FileOutput, FileType } from 'lucide-react';
+import { Copy, Download, AlertCircle, FileText, Info, Filter, FileWarning, BookCheck, FileCheck, FileOutput, FileType, GraduationCap } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -383,61 +383,80 @@ const DocumentCreator: React.FC = () => {
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {filteredTemplates.length > 0 ? (
-                        filteredTemplates.map(template => (
-                          <Card key={template.id} className="cursor-pointer hover:shadow-md transition-shadow border-muted hover:border-primary/50"
-                            onClick={() => {
-                              setSelectedTemplateId(template.id);
-                              setActiveTab('form');
-                            }}>
-                            <CardHeader className="pb-2">
-                              <CardTitle className="text-base flex justify-between items-start">
-                                <span className="flex items-center">
-                                  <FileCheck className="mr-2 h-4 w-4 text-primary" />
-                                  {template.name}
-                                </span>
-                                <Badge variant="secondary" className="ml-2 text-xs">
-                                  {template.type}
-                                </Badge>
-                              </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                              <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                                {template.description}
-                              </p>
-                              <div className="flex items-center">
-                                <Badge variant="outline" className="text-xs mr-2">
-                                  {template.fields.length} fields
-                                </Badge>
-                                <TooltipProvider>
-                                  <Tooltip>
-                                    <TooltipTrigger asChild>
-                                      <span>
-                                        <Button size="sm" variant="default" className="w-full">
-                                          Select Template
-                                        </Button>
-                                      </span>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                      <p>Use this template</p>
-                                    </TooltipContent>
-                                  </Tooltip>
-                                </TooltipProvider>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        ))
+                        <>
+                          {/* College Documents Section */}
+                          <div className="col-span-1 md:col-span-2 mt-2 mb-2">
+                            <h3 className="text-lg font-semibold text-primary flex items-center mb-2">
+                              <GraduationCap className="mr-2 h-5 w-5" />
+                              College Documents
+                            </h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              {filteredTemplates
+                                .filter(template => template.type === 'College')
+                                .map(template => (
+                                  <Card key={template.id} className="cursor-pointer hover:shadow-md transition-shadow border-muted hover:border-primary/50"
+                                    onClick={() => {
+                                      setSelectedTemplateId(template.id);
+                                      setActiveTab('form');
+                                    }}>
+                                    <CardHeader className="pb-2">
+                                      <CardTitle className="text-base flex justify-between items-start">
+                                        <span className="flex items-center">
+                                          <FileCheck className="mr-2 h-4 w-4 text-primary" />
+                                          {template.name}
+                                        </span>
+                                        <Badge variant="secondary" className="ml-2 text-xs">
+                                          College
+                                        </Badge>
+                                      </CardTitle>
+                                    </CardHeader>
+                                    <CardContent className="pt-0">
+                                      <p className="text-sm text-muted-foreground">{template.description}</p>
+                                    </CardContent>
+                                  </Card>
+                                ))}
+                            </div>
+                          </div>
+
+                          {/* Other Documents Section */}
+                          <div className="col-span-1 md:col-span-2 mt-4 mb-2">
+                            <h3 className="text-lg font-semibold text-primary flex items-center mb-2">
+                              <FileText className="mr-2 h-5 w-5" />
+                              Other Documents
+                            </h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              {filteredTemplates
+                                .filter(template => template.type !== 'College')
+                                .map(template => (
+                                  <Card key={template.id} className="cursor-pointer hover:shadow-md transition-shadow border-muted hover:border-primary/50"
+                                    onClick={() => {
+                                      setSelectedTemplateId(template.id);
+                                      setActiveTab('form');
+                                    }}>
+                                    <CardHeader className="pb-2">
+                                      <CardTitle className="text-base flex justify-between items-start">
+                                        <span className="flex items-center">
+                                          <FileCheck className="mr-2 h-4 w-4 text-primary" />
+                                          {template.name}
+                                        </span>
+                                        <Badge variant="secondary" className="ml-2 text-xs">
+                                          {template.type}
+                                        </Badge>
+                                      </CardTitle>
+                                    </CardHeader>
+                                    <CardContent className="pt-0">
+                                      <p className="text-sm text-muted-foreground">{template.description}</p>
+                                    </CardContent>
+                                  </Card>
+                                ))}
+                            </div>
+                          </div>
+                        </>
                       ) : (
-                        <div className="col-span-2 py-8 text-center">
-                          <p className="text-muted-foreground">No templates match your search criteria.</p>
-                          <Button 
-                            variant="link" 
-                            onClick={() => { 
-                              setSearchTerm('');
-                              setCategoryFilter(null);
-                            }}
-                          >
-                            Clear filters
-                          </Button>
+                        <div className="col-span-2 p-8 text-center">
+                          <FileWarning className="mx-auto h-12 w-12 text-muted-foreground/50 mb-4" />
+                          <h3 className="text-lg font-medium mb-2">No templates found</h3>
+                          <p className="text-muted-foreground">Try adjusting your search or filter criteria.</p>
                         </div>
                       )}
                     </div>

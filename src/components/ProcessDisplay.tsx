@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   CheckCircle2, 
@@ -36,6 +36,14 @@ const ProcessDisplay: React.FC<ProcessDisplayProps> = ({ taskName, overview, ste
   const [viewMode, setViewMode] = useState<'card' | 'timeline'>('timeline');
   const [activeTab, setActiveTab] = useState<'all' | 'online' | 'offline'>('all');
 
+  // Add validation and logging
+  useEffect(() => {
+    console.log("ProcessDisplay received data:", { taskName, overview, steps });
+    if (!steps || !Array.isArray(steps)) {
+      console.error("Invalid steps data received:", steps);
+    }
+  }, [taskName, overview, steps]);
+
   const toggleStep = (index: number) => {
     setExpandedStep(expandedStep === index ? null : index);
   };
@@ -50,6 +58,16 @@ const ProcessDisplay: React.FC<ProcessDisplayProps> = ({ taskName, overview, ste
     : activeTab === 'online' 
       ? onlineSteps 
       : offlineSteps;
+
+  // Add validation check
+  if (!steps || !Array.isArray(steps) || steps.length === 0) {
+    console.error("No valid steps data to display");
+    return (
+      <div className="w-full max-w-4xl mx-auto p-4 text-center">
+        <p className="text-red-500">No process steps available. Please try again.</p>
+      </div>
+    );
+  }
 
   const containerVariants = {
     hidden: { opacity: 0 },

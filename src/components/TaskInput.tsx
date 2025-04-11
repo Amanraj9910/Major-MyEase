@@ -59,13 +59,13 @@ const TaskInput: React.FC<TaskInputProps> = ({
   };
 
   const predefinedTasks = [
-    t('process:tasks.passport'),
-    t('process:tasks.aadhaar'),
-    t('process:tasks.pan'),
-    t('process:tasks.driving'),
-    t('process:tasks.voter'),
-    t('process:tasks.property'),
-    t('process:tasks.marriage')
+    'College Counseling',
+    'Choice Filling',
+    'Document Verification',
+    'Scholarship Forms',
+    'Hostel Application',
+    'Course Registration',
+    'Exam Form Filling'
   ];
 
   const handleTaskClick = (task: string) => {

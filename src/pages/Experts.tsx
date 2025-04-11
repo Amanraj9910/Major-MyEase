@@ -11,10 +11,135 @@ import { ExpertDetailView, ExpertDetails } from '@/components/experts/ExpertDeta
 
 // Define the expert details including all fields needed for the detailed view
 const expertDetailsData: ExpertDetails[] = [
+  // Expert #5 (Moved to top)
+  {
+    id: 5,
+    name: "Aman Raj",
+    image: "/public/IMG/aman.jpg",
+    field: "Education & Scholarships",
+    specialization: ["Scholarship Applications", "University Admissions", "Education Loans", "Foreign University Applications", "Study Abroad Counseling"],
+    rating: 4.8,
+    experience: 4,
+    rate: 12,
+    languages: ["English", "Hindi"],
+    bio: "Aman Raj is an education counselor with 14 years of experience helping students navigate admissions and scholarship processes both in India and abroad. He specializes in identifying scholarship opportunities, preparing compelling applications, and guiding students through university admissions. His expertise has helped over 2,000 students secure admissions and over ₹40 crores in total scholarship funding.",
+    location: "Damoh, MAdhya Pradesh",
+    phone: "+91 9910772433",
+    email: "aman.raj@example.com",
+    availability: [
+      { day: "Monday", slots: ["9:00 AM", "10:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"] },
+      { day: "Tuesday", slots: ["9:00 AM", "10:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"] },
+      { day: "Wednesday", slots: ["9:00 AM", "10:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"] },
+      { day: "Friday", slots: ["9:00 AM", "10:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"] },
+      { day: "Saturday", slots: ["9:00 AM", "10:30 AM", "12:00 PM"] },
+    ],
+    reviews: [
+      {
+        id: "rev1",
+        name: "Rohan Das",
+        avatar: "https://randomuser.me/api/portraits/men/72.jpg",
+        date: "August 12, 2023",
+        rating: 5,
+        comment: "Aman helped me secure a full scholarship to my dream university in the USA. His guidance through the application process was invaluable.",
+        service: "Scholarship Application",
+        verified: true
+      },
+      {
+        id: "rev2",
+        name: "Nisha Sharma",
+        date: "July 23, 2023",
+        rating: 4.5,
+        comment: "Excellent support for my son's undergraduate applications. He helped us navigate the complex admission requirements for multiple universities.",
+        service: "University Admissions",
+        verified: true
+      },
+      {
+        id: "rev3",
+        name: "Aryan Khanna",
+        avatar: "https://randomuser.me/api/portraits/men/35.jpg",
+        date: "June 14, 2023",
+        rating: 5,
+        comment: "The education loan process was so smooth with Aman's help. He knew exactly what documentation was needed and helped us prepare everything perfectly.",
+        service: "Education Loan Guidance",
+        verified: true
+      }
+    ],
+    achievements: [
+      {
+        id: "ach1",
+        title: "Certified Education Counselor",
+        issuer: "International Association of College Admission Counseling",
+        date: "2012",
+        description: "Professional certification in university admissions counseling.",
+        icon: <Award className="h-5 w-5" />
+      },
+      {
+        id: "ach2",
+        title: "Scholarship Facilitation Excellence Award",
+        issuer: "Association of Indian Education Consultants",
+        date: "2019",
+        description: "Recognized for exceptional success in helping students secure scholarships.",
+        icon: <Star className="h-5 w-5" />
+      }
+    ],
+    experience_details: [
+      {
+        id: "exp1",
+        role: "Senior Education Counselor",
+        company: "Global Education Pathways",
+        period: "2015 - Present",
+        description: "Providing comprehensive guidance for university admissions, scholarship applications, and study abroad planning. Specializing in US, UK, Canada, and Australia admissions."
+      },
+      {
+        id: "exp2",
+        role: "University Relations Manager",
+        company: "IDP Education",
+        period: "2010 - 2015",
+        description: "Managed relationships with partner universities, stayed updated on admission requirements, and counseled students on university selection and application strategies."
+      }
+    ],
+    education: [
+      {
+        id: "edu1",
+        degree: "Bachelor's in Engineering",
+        institution: "Jabalpur Engineering College",
+        year: "2009"
+      },
+      {
+        id: "edu2",
+        degree: "Master's in Education Administration",
+        institution: "Jadavpur University",
+        year: "2009"
+      }
+    ],
+    successRate: 89,
+    clientsServed: 2150,
+    completedCases: 1920,
+    responseTime: "Under 4 hours",
+    successfulCases: [
+      {
+        id: "case1",
+        title: "Full Scholarship to MIT",
+        description: "Guided a student from application to securing a full scholarship to Massachusetts Institute of Technology for Computer Science program.",
+        date: "January 2023",
+        category: "Scholarship Application",
+        outcome: "Full scholarship worth $320,000"
+      },
+      {
+        id: "case2",
+        title: "Multiple University Admissions with Scholarships",
+        description: "Helped a student secure admissions to 6 top universities with scholarship offers, allowing them to make the best choice for their academic and financial situation.",
+        date: "December 2022",
+        category: "University Admissions",
+        outcome: "Admission to all 6 universities with scholarships ranging from 25% to 75%"
+      }
+    ]
+  },
+  // Expert #1
   {
     id: 1,
-    name: "Dr. Priya Sharma",
-    image: "https://randomuser.me/api/portraits/women/11.jpg",
+    name: "Draupadi Murmu",
+    image: "/public/IMG/expert-4.jpg",
     field: "Passport & Visa",
     specialization: ["Passport Applications", "Foreign Visas", "OCI Cards", "Visa Extensions", "Emergency Travel Documents"],
     rating: 4.9,
@@ -159,10 +284,11 @@ const expertDetailsData: ExpertDetails[] = [
       }
     ]
   },
+  // Expert #2
   {
     id: 2,
     name: "Rajesh Kumar",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
+    image: "/public/IMG/expert-2.jpg",
     field: "Property & Land",
     specialization: ["Property Registration", "Land Disputes", "Title Verification", "Legal Documentation", "Real Estate Consultation"],
     rating: 4.7,
@@ -282,11 +408,11 @@ const expertDetailsData: ExpertDetails[] = [
       }
     ]
   },
-  // New expert #3
+  // Expert #3
   {
     id: 3,
     name: "Aishwarya Verma",
-    image: "https://randomuser.me/api/portraits/women/28.jpg",
+    image: "/public/IMG/expert-3.jpg",
     field: "Income Tax",
     specialization: ["Tax Filing", "Audit Defense", "Tax Planning", "GST Registration", "Corporate Taxation"],
     rating: 4.8,
@@ -429,11 +555,11 @@ const expertDetailsData: ExpertDetails[] = [
       }
     ]
   },
-  // New expert #4
+  // Expert #4
   {
     id: 4,
     name: "Dr. Vikram Desai",
-    image: "https://randomuser.me/api/portraits/men/75.jpg",
+    image: "/public/IMG/expert-1.jpg",
     field: "Medical Insurance",
     specialization: ["Policy Claims", "Coverage Disputes", "Insurance Appeals", "Medical Billing", "Policy Selection"],
     rating: 4.9,
@@ -549,130 +675,6 @@ const expertDetailsData: ExpertDetails[] = [
         date: "November 2022",
         category: "Coverage Dispute",
         outcome: "Claim approved with full benefits"
-      }
-    ]
-  },
-  // New expert #5
-  {
-    id: 5,
-    name: "Sunita Agarwal",
-    image: "https://randomuser.me/api/portraits/women/65.jpg",
-    field: "Education & Scholarships",
-    specialization: ["Scholarship Applications", "University Admissions", "Education Loans", "Foreign University Applications", "Study Abroad Counseling"],
-    rating: 4.8,
-    experience: 14,
-    rate: 12,
-    languages: ["English", "Hindi", "Bengali"],
-    bio: "Sunita Agarwal is an education counselor with 14 years of experience helping students navigate admissions and scholarship processes both in India and abroad. She specializes in identifying scholarship opportunities, preparing compelling applications, and guiding students through university admissions. Her expertise has helped over 2,000 students secure admissions and over ₹40 crores in total scholarship funding.",
-    location: "Kolkata, West Bengal",
-    phone: "+91 9876543214",
-    email: "sunita.agarwal@example.com",
-    availability: [
-      { day: "Monday", slots: ["9:00 AM", "10:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"] },
-      { day: "Tuesday", slots: ["9:00 AM", "10:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"] },
-      { day: "Wednesday", slots: ["9:00 AM", "10:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"] },
-      { day: "Friday", slots: ["9:00 AM", "10:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"] },
-      { day: "Saturday", slots: ["9:00 AM", "10:30 AM", "12:00 PM"] },
-    ],
-    reviews: [
-      {
-        id: "rev1",
-        name: "Rohan Das",
-        avatar: "https://randomuser.me/api/portraits/men/72.jpg",
-        date: "August 12, 2023",
-        rating: 5,
-        comment: "Ms. Agarwal helped me secure a full scholarship to my dream university in the USA. Her guidance through the application process was invaluable.",
-        service: "Scholarship Application",
-        verified: true
-      },
-      {
-        id: "rev2",
-        name: "Nisha Sharma",
-        date: "July 23, 2023",
-        rating: 4.5,
-        comment: "Excellent support for my son's undergraduate applications. She helped us navigate the complex admission requirements for multiple universities.",
-        service: "University Admissions",
-        verified: true
-      },
-      {
-        id: "rev3",
-        name: "Aryan Khanna",
-        avatar: "https://randomuser.me/api/portraits/men/35.jpg",
-        date: "June 14, 2023",
-        rating: 5,
-        comment: "The education loan process was so smooth with Sunita's help. She knew exactly what documentation was needed and helped us prepare everything perfectly.",
-        service: "Education Loan Guidance",
-        verified: true
-      }
-    ],
-    achievements: [
-      {
-        id: "ach1",
-        title: "Certified Education Counselor",
-        issuer: "International Association of College Admission Counseling",
-        date: "2012",
-        description: "Professional certification in university admissions counseling.",
-        icon: <Award className="h-5 w-5" />
-      },
-      {
-        id: "ach2",
-        title: "Scholarship Facilitation Excellence Award",
-        issuer: "Association of Indian Education Consultants",
-        date: "2019",
-        description: "Recognized for exceptional success in helping students secure scholarships.",
-        icon: <Star className="h-5 w-5" />
-      }
-    ],
-    experience_details: [
-      {
-        id: "exp1",
-        role: "Senior Education Counselor",
-        company: "Global Education Pathways",
-        period: "2015 - Present",
-        description: "Providing comprehensive guidance for university admissions, scholarship applications, and study abroad planning. Specializing in US, UK, Canada, and Australia admissions."
-      },
-      {
-        id: "exp2",
-        role: "University Relations Manager",
-        company: "IDP Education",
-        period: "2010 - 2015",
-        description: "Managed relationships with partner universities, stayed updated on admission requirements, and counseled students on university selection and application strategies."
-      }
-    ],
-    education: [
-      {
-        id: "edu1",
-        degree: "Master's in Education Administration",
-        institution: "Jadavpur University",
-        year: "2009"
-      },
-      {
-        id: "edu2",
-        degree: "Bachelor's in English Literature",
-        institution: "Calcutta University",
-        year: "2006"
-      }
-    ],
-    successRate: 89,
-    clientsServed: 2150,
-    completedCases: 1920,
-    responseTime: "Under 4 hours",
-    successfulCases: [
-      {
-        id: "case1",
-        title: "Full Scholarship to MIT",
-        description: "Guided a student from application to securing a full scholarship to Massachusetts Institute of Technology for Computer Science program.",
-        date: "January 2023",
-        category: "Scholarship Application",
-        outcome: "Full scholarship worth $320,000"
-      },
-      {
-        id: "case2",
-        title: "Multiple University Admissions with Scholarships",
-        description: "Helped a student secure admissions to 6 top universities with scholarship offers, allowing them to make the best choice for their academic and financial situation.",
-        date: "December 2022",
-        category: "University Admissions",
-        outcome: "Admission to all 6 universities with scholarships ranging from 25% to 75%"
       }
     ]
   }

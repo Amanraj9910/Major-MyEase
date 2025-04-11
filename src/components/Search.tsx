@@ -171,30 +171,51 @@ const Search = () => {
               <button 
                 type="button" 
                 className="ml-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors font-medium"
-                onClick={() => handlePopularSearch('Passport')}
+                onClick={() => handlePopularSearch('College Counseling')}
               >
-                Passport
+                College Counseling
               </button>,
               <button 
                 type="button" 
                 className="ml-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors font-medium"
-                onClick={() => handlePopularSearch('Aadhar Card')}
+                onClick={() => handlePopularSearch('Choice Filling')}
               >
-                Aadhar Card
+                Choice Filling
               </button>,
               <button 
                 type="button" 
                 className="ml-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors font-medium"
-                onClick={() => handlePopularSearch('Driving License')}
+                onClick={() => handlePopularSearch('Document Verification')}
               >
-                Driving License
+                Document Verification
               </button>,
               <button 
                 type="button" 
                 className="ml-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors font-medium"
-                onClick={() => handlePopularSearch('Income Certificate')}
+                onClick={() => handlePopularSearch('Scholarship Forms')}
               >
-                Income Certificate
+                Scholarship Forms
+              </button>,
+              <button 
+                type="button" 
+                className="ml-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors font-medium"
+                onClick={() => handlePopularSearch('Hostel Application')}
+              >
+                Hostel Application
+              </button>,
+              <button 
+                type="button" 
+                className="ml-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors font-medium"
+                onClick={() => handlePopularSearch('Course Registration')}
+              >
+                Course Registration
+              </button>,
+              <button 
+                type="button" 
+                className="ml-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors font-medium"
+                onClick={() => handlePopularSearch('Exam Form Filling')}
+              >
+                Exam Form Filling
               </button>
             </p>
           </div>

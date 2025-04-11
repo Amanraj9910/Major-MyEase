@@ -41,7 +41,9 @@ const ProcessGenerator: React.FC = () => {
   const handleTaskSubmit = async (taskInput: string) => {
     setIsLoading(true);
     try {
+      console.log('Submitting task:', taskInput);
       const data = await getProcessSteps(taskInput);
+      console.log('Received process data:', data);
       setTask(taskInput);
       setProcessData(data);
       

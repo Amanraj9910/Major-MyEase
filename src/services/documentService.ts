@@ -6,7 +6,7 @@ export const documentTemplates: DocumentTemplate[] = [
     id: 'authorization-letter',
     name: 'Authorization Letter',
     description: 'Authorize someone to act on your behalf for specific purposes',
-    type: 'Private',
+    type: 'Personal',
     fields: [
       { name: 'authorName', label: 'Your Full Name', type: 'text', placeholder: 'Your full name', required: true },
       { name: 'authorAddress', label: 'Your Address', type: 'textarea', placeholder: 'Your complete address', required: true },
@@ -149,7 +149,7 @@ Sincerely,
     id: 'consent-form',
     name: 'General Consent Form',
     description: 'A form granting permission for a specific activity or purpose',
-    type: 'Private',
+    type: 'Personal',
     fields: [
       { name: 'consentorName', label: 'Name of Person Giving Consent', type: 'text', placeholder: 'Your full name', required: true },
       { name: 'consentorAddress', label: 'Address', type: 'textarea', placeholder: 'Your complete address', required: true },
@@ -257,7 +257,7 @@ Address:                                Address:`,
     id: 'roommate-agreement',
     name: 'Roommate Agreement',
     description: 'Agreement between roommates sharing living space',
-    type: 'Private',
+    type: 'Personal',
     fields: [
       { name: 'address', label: 'Shared Residence Address', type: 'textarea', placeholder: 'Complete address of the shared residence', required: true },
       { name: 'roommateNames', label: 'Names of All Roommates', type: 'textarea', placeholder: 'List all roommates, one per line', required: true },
@@ -327,7 +327,7 @@ Signatures:
     id: 'noc-letter',
     name: 'No Objection Certificate (NOC)',
     description: 'General purpose No Objection Certificate',
-    type: 'Private',
+    type: 'Personal',
     fields: [
       { name: 'issuerName', label: 'Name of Issuer/Organization', type: 'text', placeholder: 'Your name or organization name', required: true },
       { name: 'issuerAddress', label: 'Issuer Address', type: 'textarea', placeholder: 'Your complete address', required: true },
@@ -478,6 +478,353 @@ ____________________
 [recipientName]
 Date: [CurrentDate]`,
     disclaimer: 'This is a basic receipt acknowledgment form. For tax purposes or formal accounting, you may need to use specific formats required by relevant tax authorities.'
+  },
+  {
+    id: 'medical-certificate',
+    name: 'Medical Certificate (Format)',
+    description: 'Standard format for a medical certificate issued by a doctor',
+    type: 'College',
+    fields: [
+      { name: 'doctorName', label: 'Doctor\'s Name', type: 'text', placeholder: 'Full name of the doctor', required: true },
+      { name: 'doctorQualification', label: 'Doctor\'s Qualification', type: 'text', placeholder: 'e.g., MBBS, MD', required: true },
+      { name: 'hospitalName', label: 'Hospital/Clinic Name', type: 'text', placeholder: 'Name of the hospital or clinic', required: true },
+      { name: 'hospitalAddress', label: 'Hospital/Clinic Address', type: 'textarea', placeholder: 'Complete address of the hospital or clinic', required: true },
+      { name: 'registerNumber', label: 'Doctor\'s Registration Number', type: 'text', placeholder: 'Medical registration number', required: true },
+      { name: 'patientName', label: 'Patient\'s Name', type: 'text', placeholder: 'Full name of the patient/student', required: true },
+      { name: 'patientAge', label: 'Patient\'s Age', type: 'text', placeholder: 'Age of the patient', required: true },
+      { name: 'patientGender', label: 'Patient\'s Gender', type: 'text', placeholder: 'Gender of the patient', required: true },
+      { name: 'diagnosis', label: 'Diagnosis/Condition', type: 'textarea', placeholder: 'Medical condition or diagnosis', required: true },
+      { name: 'treatmentPeriod', label: 'Treatment Period', type: 'text', placeholder: 'e.g., 10th Jan 2023 to 15th Jan 2023', required: true },
+      { name: 'restPeriod', label: 'Recommended Rest Period', type: 'text', placeholder: 'e.g., 7 days from date of issue', required: true },
+      { name: 'additionalRemarks', label: 'Additional Remarks', type: 'textarea', placeholder: 'Any additional medical remarks', required: false }
+    ],
+    templateString: `MEDICAL CERTIFICATE
+
+Date: [CurrentDate]
+
+TO WHOM IT MAY CONCERN
+
+This is to certify that [patientName], aged [patientAge] years, [patientGender], was under my treatment from [treatmentPeriod] for [diagnosis].
+
+The patient has been advised rest for [restPeriod] and may not be able to attend college/work during this period.
+
+Additional Remarks: [additionalRemarks]
+
+This certificate is issued at the request of the patient for the purpose of leave/absence from college/work.
+
+Signature:
+Dr. [doctorName], [doctorQualification]
+Registration No.: [registerNumber]
+
+Seal:
+[hospitalName]
+[hospitalAddress]`,
+    disclaimer: 'This is a format for a medical certificate. In real scenarios, a valid certificate must be issued by a registered medical practitioner with proper signature and stamp.'
+  },
+  {
+    id: 'undertaking-backlogs',
+    name: 'Undertaking for Backlogs/Attendance',
+    description: 'Formal undertaking by a student regarding academic backlogs or attendance shortage',
+    type: 'College',
+    fields: [
+      { name: 'studentName', label: 'Student\'s Full Name', type: 'text', placeholder: 'Your full name', required: true },
+      { name: 'studentId', label: 'Student ID/Roll Number', type: 'text', placeholder: 'Your college ID or roll number', required: true },
+      { name: 'course', label: 'Course/Program', type: 'text', placeholder: 'e.g., B.Tech Computer Science', required: true },
+      { name: 'semester', label: 'Current Semester', type: 'text', placeholder: 'e.g., 5th Semester', required: true },
+      { name: 'undertakingType', label: 'Type of Undertaking', type: 'select', options: ['Attendance Shortage', 'Academic Backlogs', 'Both'], required: true },
+      { name: 'attendanceDetails', label: 'Attendance Details (if applicable)', type: 'textarea', placeholder: 'Details of attendance shortage, subjects, and percentages', required: false },
+      { name: 'backlogDetails', label: 'Backlog Details (if applicable)', type: 'textarea', placeholder: 'List of backlog subjects and exam attempts', required: false },
+      { name: 'reason', label: 'Reason for Shortage/Backlogs', type: 'textarea', placeholder: 'Explain the reasons for attendance shortage or backlogs', required: true },
+      { name: 'improvement', label: 'Improvement Plan', type: 'textarea', placeholder: 'How you plan to improve attendance or clear backlogs', required: true },
+      { name: 'parentName', label: 'Parent/Guardian Name', type: 'text', placeholder: 'Full name of parent or guardian', required: true },
+      { name: 'parentContact', label: 'Parent/Guardian Contact', type: 'text', placeholder: 'Phone number of parent or guardian', required: true }
+    ],
+    templateString: `UNDERTAKING
+
+Date: [CurrentDate]
+
+To,
+The Principal/HOD,
+[course] Department,
+College Name
+
+Subject: Undertaking for [undertakingType]
+
+I, [studentName], Roll No. [studentId], a student of [course], [semester], do hereby submit this undertaking:
+
+[attendanceDetails]
+
+[backlogDetails]
+
+Reason:
+[reason]
+
+Improvement Plan:
+[improvement]
+
+I understand that failure to comply with this undertaking may result in action as per the college rules, including but not limited to detention from examinations or termination from the course.
+
+My parent/guardian is aware of this situation, and their contact details are provided below.
+
+Student's Signature:
+Name: [studentName]
+Date: [CurrentDate]
+
+Parent's/Guardian's Acknowledgement:
+Name: [parentName]
+Contact: [parentContact]
+Signature:
+Date: [CurrentDate]`,
+    disclaimer: 'This is a general undertaking format. Check with your educational institution for specific format requirements.'
+  },
+  {
+    id: 'internship-permission',
+    name: 'Internship Permission Letter',
+    description: 'Letter requesting permission from college/university to pursue an internship',
+    type: 'College',
+    fields: [
+      { name: 'studentName', label: 'Student\'s Full Name', type: 'text', placeholder: 'Your full name', required: true },
+      { name: 'studentId', label: 'Student ID/Roll Number', type: 'text', placeholder: 'Your college ID or roll number', required: true },
+      { name: 'course', label: 'Course/Program', type: 'text', placeholder: 'e.g., B.Tech Computer Science', required: true },
+      { name: 'semester', label: 'Current Semester', type: 'text', placeholder: 'e.g., 6th Semester', required: true },
+      { name: 'hod', label: 'Head of Department Name', type: 'text', placeholder: 'Full name of your HOD', required: true },
+      { name: 'companyName', label: 'Company/Organization Name', type: 'text', placeholder: 'Where you will intern', required: true },
+      { name: 'companyAddress', label: 'Company Address', type: 'textarea', placeholder: 'Complete address of the company', required: true },
+      { name: 'internshipRole', label: 'Internship Role/Position', type: 'text', placeholder: 'e.g., Software Development Intern', required: true },
+      { name: 'internshipDuration', label: 'Internship Duration', type: 'text', placeholder: 'e.g., 2 months (1st June to 31st July 2023)', required: true },
+      { name: 'workingHours', label: 'Working Hours', type: 'text', placeholder: 'e.g., 9 AM to 5 PM, Monday to Friday', required: true },
+      { name: 'stipend', label: 'Stipend (if any)', type: 'text', placeholder: 'e.g., ₹15,000 per month', required: false },
+      { name: 'relevance', label: 'Relevance to Course', type: 'textarea', placeholder: 'Explain how this internship relates to your academic course', required: true },
+      { name: 'contactPerson', label: 'Contact Person at Company', type: 'text', placeholder: 'Name and designation of your supervisor', required: true },
+      { name: 'contactEmail', label: 'Contact Email/Phone', type: 'text', placeholder: 'Email or phone of contact person', required: true }
+    ],
+    templateString: `Date: [CurrentDate]
+
+To,
+The Head of Department,
+[course] Department,
+College Name
+
+Subject: Permission for Internship
+
+Respected [hod],
+
+I, [studentName], Roll No. [studentId], a student of [course], [semester], would like to request your permission to undertake an internship opportunity that has been offered to me.
+
+Internship Details:
+- Company Name: [companyName]
+- Address: [companyAddress]
+- Position: [internshipRole]
+- Duration: [internshipDuration]
+- Working Hours: [workingHours]
+- Stipend: [stipend]
+
+Relevance to my course:
+[relevance]
+
+Company Contact Person:
+[contactPerson]
+[contactEmail]
+
+I assure you that this internship will not affect my academic performance, and I will ensure to complete all college assignments and attend any mandatory sessions as required.
+
+I have attached the offer letter from the company for your reference. I request you to kindly grant me permission and provide me with a No Objection Certificate (NOC) that I can submit to the company.
+
+Thanking you in anticipation.
+
+Yours sincerely,
+
+[studentName]
+Roll No.: [studentId]
+Contact: [contactEmail]`,
+    disclaimer: 'This is a general template. Your college may have a specific format or additional requirements for internship permission.'
+  },
+  {
+    id: 'leave-application',
+    name: 'Leave Application',
+    description: 'Formal application for leave from college/university',
+    type: 'College',
+    fields: [
+      { name: 'studentName', label: 'Student\'s Full Name', type: 'text', placeholder: 'Your full name', required: true },
+      { name: 'studentId', label: 'Student ID/Roll Number', type: 'text', placeholder: 'Your college ID or roll number', required: true },
+      { name: 'course', label: 'Course/Program', type: 'text', placeholder: 'e.g., B.Tech Computer Science', required: true },
+      { name: 'semester', label: 'Current Semester', type: 'text', placeholder: 'e.g., 3rd Semester', required: true },
+      { name: 'recipientDesignation', label: 'Recipient\'s Designation', type: 'text', placeholder: 'e.g., Class Teacher, HOD, Principal', required: true },
+      { name: 'leaveType', label: 'Type of Leave', type: 'select', options: ['Medical Leave', 'Personal Leave', 'Family Emergency', 'Event Participation', 'Other'], required: true },
+      { name: 'leaveDuration', label: 'Leave Duration', type: 'text', placeholder: 'e.g., 3 days (15th to 17th October 2023)', required: true },
+      { name: 'reason', label: 'Reason for Leave', type: 'textarea', placeholder: 'Detailed explanation for the leave request', required: true },
+      { name: 'missedActivities', label: 'Academic Activities Missed', type: 'textarea', placeholder: 'List classes, labs, or exams that will be missed', required: true },
+      { name: 'makeup', label: 'Plan to Make Up for Missed Work', type: 'textarea', placeholder: 'How you plan to complete missed assignments/classes', required: true },
+      { name: 'attachments', label: 'Attachments (if any)', type: 'text', placeholder: 'e.g., Medical certificate, Event invitation', required: false },
+      { name: 'parentContact', label: 'Parent/Guardian Contact', type: 'text', placeholder: 'Phone number for verification', required: true }
+    ],
+    templateString: `Date: [CurrentDate]
+
+To,
+The [recipientDesignation],
+College Name
+
+Subject: Application for [leaveType]
+
+Respected Sir/Madam,
+
+I, [studentName], Roll No. [studentId], a student of [course], [semester], am writing to request leave for [leaveDuration].
+
+Reason for Leave:
+[reason]
+
+During this period, I will miss the following academic activities:
+[missedActivities]
+
+I plan to make up for the missed work as follows:
+[makeup]
+
+I have attached the following documents for your reference:
+[attachments]
+
+My parent/guardian is aware of this leave application and can be contacted at [parentContact] for verification.
+
+I would be grateful if you could grant me leave for the mentioned period.
+
+Thanking you.
+
+Yours obediently,
+
+[studentName]
+Roll No.: [studentId]
+
+Parent's/Guardian's Acknowledgement:
+Name:
+Signature:
+Date: [CurrentDate]`,
+    disclaimer: 'This is a general leave application format. Your institution may have specific procedures or forms for leave applications.'
+  },
+  {
+    id: 'gap-year-affidavit',
+    name: 'Affidavit for Gap Year',
+    description: 'Legal affidavit explaining the gap in education for admission purposes',
+    type: 'College',
+    fields: [
+      { name: 'studentName', label: 'Student\'s Full Name', type: 'text', placeholder: 'Your full name', required: true },
+      { name: 'fatherName', label: 'Father\'s Name', type: 'text', placeholder: 'Your father\'s full name', required: true },
+      { name: 'address', label: 'Permanent Address', type: 'textarea', placeholder: 'Your complete permanent address', required: true },
+      { name: 'lastQualification', label: 'Last Qualification', type: 'text', placeholder: 'e.g., Higher Secondary (12th)', required: true },
+      { name: 'lastInstitution', label: 'Last Institution Attended', type: 'text', placeholder: 'Name of school/college last attended', required: true },
+      { name: 'completionYear', label: 'Year of Completion', type: 'text', placeholder: 'When you completed your last education', required: true },
+      { name: 'gapDuration', label: 'Gap Duration', type: 'text', placeholder: 'e.g., 1 year (2022-2023)', required: true },
+      { name: 'gapReason', label: 'Reason for Gap', type: 'textarea', placeholder: 'Detailed explanation of what you did during the gap year', required: true },
+      { name: 'currentAdmission', label: 'Current Admission Sought', type: 'text', placeholder: 'e.g., B.Tech Computer Science at ABC Institute', required: true },
+      { name: 'declaration', label: 'Additional Declaration', type: 'textarea', placeholder: 'Any additional declaration about your activities', required: false }
+    ],
+    templateString: `AFFIDAVIT
+
+(To be executed on appropriate non-judicial stamp paper and notarized)
+
+I, [studentName], son/daughter of [fatherName], resident of [address], do hereby solemnly affirm and declare as under:
+
+1. That I have passed my [lastQualification] examination from [lastInstitution] in the year [completionYear].
+
+2. That there is a gap of [gapDuration] in my academic career before seeking admission to [currentAdmission].
+
+3. That during this gap period, I was engaged in the following activities:
+   [gapReason]
+
+4. That during this gap period, I have not joined any College/Institution/Course or appeared in any examination.
+
+5. [declaration]
+
+6. That I was not involved in any criminal offense or unlawful activities during this gap period, and no criminal case is pending against me in any court of law.
+
+I declare that the above statement is true to the best of my knowledge and belief.
+
+Place: _________________
+Date: [CurrentDate]
+
+DEPONENT
+
+VERIFICATION:
+Verified that the contents of this affidavit are true and correct to the best of my knowledge and belief and nothing has been concealed therein.
+
+Place: _________________
+Date: [CurrentDate]
+
+DEPONENT
+
+(To be signed in the presence of a Notary Public)`,
+    disclaimer: 'This is a general format for a gap year affidavit. The exact format and requirements may vary by institution and legal jurisdiction. This document should be executed on appropriate stamp paper and notarized.'
+  },
+  {
+    id: 'hostel-leave-form',
+    name: 'Hostel Leave Form',
+    description: 'Application form for hostel residents to request leave/absence',
+    type: 'College',
+    fields: [
+      { name: 'studentName', label: 'Student\'s Full Name', type: 'text', placeholder: 'Your full name', required: true },
+      { name: 'studentId', label: 'Student ID/Roll Number', type: 'text', placeholder: 'Your college ID or roll number', required: true },
+      { name: 'course', label: 'Course/Program', type: 'text', placeholder: 'e.g., B.Tech Computer Science', required: true },
+      { name: 'semester', label: 'Current Semester', type: 'text', placeholder: 'e.g., 4th Semester', required: true },
+      { name: 'hostelName', label: 'Hostel Name/Number', type: 'text', placeholder: 'e.g., Boys Hostel A, Girls Hostel 2', required: true },
+      { name: 'roomNumber', label: 'Room Number', type: 'text', placeholder: 'Your hostel room number', required: true },
+      { name: 'leaveType', label: 'Type of Leave', type: 'select', options: ['Weekend Leave', 'Holiday Leave', 'Home Visit', 'Medical Leave', 'Other'], required: true },
+      { name: 'leaveDuration', label: 'Leave Duration', type: 'text', placeholder: 'e.g., 3 days (15th to 17th October 2023)', required: true },
+      { name: 'leaveFrom', label: 'Leaving Date & Time', type: 'text', placeholder: 'e.g., 15th October 2023, 5:00 PM', required: true },
+      { name: 'returnDate', label: 'Expected Return Date & Time', type: 'text', placeholder: 'e.g., 17th October 2023, 7:00 PM', required: true },
+      { name: 'destination', label: 'Destination Address', type: 'textarea', placeholder: 'Complete address where you will stay', required: true },
+      { name: 'purpose', label: 'Purpose of Leave', type: 'textarea', placeholder: 'Detailed reason for leave', required: true },
+      { name: 'travelMode', label: 'Mode of Travel', type: 'text', placeholder: 'e.g., Bus, Train, Parents picking up', required: true },
+      { name: 'contactWhileAway', label: 'Contact Number While Away', type: 'text', placeholder: 'Your phone number during leave', required: true },
+      { name: 'parentName', label: 'Parent/Guardian Name', type: 'text', placeholder: 'Full name of parent or guardian', required: true },
+      { name: 'parentContact', label: 'Parent/Guardian Contact', type: 'text', placeholder: 'Phone number for verification', required: true }
+    ],
+    templateString: `HOSTEL LEAVE APPLICATION FORM
+
+Date: [CurrentDate]
+
+To,
+The Warden,
+[hostelName],
+College Name
+
+Student Details:
+Name: [studentName]
+Roll No.: [studentId]
+Course & Semester: [course], [semester]
+Hostel & Room No.: [hostelName], [roomNumber]
+
+Leave Details:
+Type of Leave: [leaveType]
+Duration: [leaveDuration]
+Leaving Date & Time: [leaveFrom]
+Expected Return Date & Time: [returnDate]
+
+Destination Address:
+[destination]
+
+Purpose of Leave:
+[purpose]
+
+Mode of Travel: [travelMode]
+Contact Number While Away: [contactWhileAway]
+
+I undertake to follow all hostel rules regarding leave and will return on the specified date. I understand that violation of hostel rules may result in disciplinary action.
+
+Student's Signature:
+Date: [CurrentDate]
+
+Parent's/Guardian's Authorization:
+I, [parentName] (parent/guardian), am aware of and authorize this leave. I can be contacted at [parentContact] for verification.
+
+Parent's Signature:
+Date: [CurrentDate]
+
+FOR OFFICE USE ONLY:
+( ) Approved  ( ) Not Approved
+
+Remarks:
+
+Warden's Signature:
+Date:`,
+    disclaimer: 'This is a general hostel leave application format. Your institution may have specific forms or digital systems for leave applications.'
   }
 ];
 
